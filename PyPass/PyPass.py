@@ -2,6 +2,7 @@ import json
 import os.path
 from cryptography.fernet import Fernet
 import atexit
+import getpass as gp
 
 
 def check_assets():
@@ -122,11 +123,22 @@ def add_account():
     # Asking for information
     website = input('Enter website name: ').lower()
     username = input('Enter username: ')
-    password = input('Enter password: ')
+    password = gp.getpass('Enter password: ')
     notes = input('Enter notes (If none, type "None"): ')
 
+    # Accesses key
+    file = open("key.key", 'rb')
+    key = file.read()
+    file.close()
+    fernet = Fernet(key)
+
+    # Encrypting Password
+    password = password.encode()
+    encrypted_password = fernet.encrypt(password)
+    encrypted_password = encrypted_password.decode("utf-8")
+
     # Prepares to add new account
-    new_account = {"website": website, "username": username, "password": password, "notes": notes}
+    new_account = {"website": website, "username": username, "password": encrypted_password, "notes": notes}
 
     # Loads "database.json"
     with open("database.json", 'r+') as file:
@@ -185,13 +197,22 @@ def search_for_account():
     with open("database.json") as f:
         data = json.load(f)
 
+    # Accesses key
+    file = open("key.key", 'rb')
+    key = file.read()
+    file.close()
+    fernet = Fernet(key)
+
     # Looping through the accounts to find the account that the user is looking for
     for account in data["accounts"]:
         if account["website"] == website:
+            decrypted_password = account["password"].encode()
+            decrypted_password = fernet.decrypt(decrypted_password)
             print('###########')
             print(f'Website: {account["website"]}')
             print(f'Username: {account["username"]}')
-            print(f'Password: {account["password"]}')
+            print(f'Password - Encrypted: {account["password"]}')
+            print(f'Password - Decrypted: {decrypted_password}')
             print(f'Notes: {account["notes"]}')
             print('###########')
 
