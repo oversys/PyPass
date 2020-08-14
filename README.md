@@ -9,3 +9,11 @@ A simple Python Password Manager to allow you to save your passwords and interac
 * Once done with the program, you can use the exit operation, use a keyboard interrupt(^C), or "X" out of the program. The "database.json" will be automatically encrypted.
 * Cut the "key.key" file and paste it somewhere in your machine that no one knows about.
 * This cut and paste back system is done as to prevent unauthorized access. In future updates, I may add an open file dialogue.
+
+## Build 1
+* Basic features released
+
+## Build 2
+* Increased security by doing the following:
+  - Passwords are hidden when adding new accounts
+  - Passwords are encrypted and only get decrypted when searching for an individual account or in the confirm to delete account prompt.
