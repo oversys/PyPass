@@ -271,7 +271,7 @@ if does_file_exist("database"):
         exit()
 else:
     if does_file_exist("key") == False:
-        print("Key and database do not exist. Initiating first-time setup.")
+        print("Key and database do not exist. Initiating first-time setup...")
         create_key()
         test_key()
         database_structure = {
