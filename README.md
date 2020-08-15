@@ -20,5 +20,6 @@ A simple Python Password Manager to allow you to save your passwords and interac
  
  ## Build 3
  * Re-structured the code (credits to hankhank10 - https://github.com/hankhank10/PyPass)
- * Fixed a major security flaw
  * Program works differently now
+ * Fixed a major security flaw
+ * Removed the atexit library
