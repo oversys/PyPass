@@ -27,6 +27,7 @@ A simple Python Password Manager to allow you to save your passwords and interac
  
  ## Build 4
   * Added huge "PyPass" text on program start
+  * Fixed a few missing "."s
   * Website names are no longer saved in their ".lower()" version
   * Fixed all notes being saved as "User did not enter notes."
   * Causing a Keyboard Interrupt in any of the information prompts of the "Add Account" feature will now send you back to the select operation menu
