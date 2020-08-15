@@ -183,7 +183,7 @@ def specific_account(website, action="view"):
 
     # Looping through the accounts to find the account that the user is looking for
     for account in data["accounts"]:
-        if account["website"] == website:
+        if account["website"].lower() == website:
             fernet = get_key()
             decrypted_password = account.get("password").encode()
             decrypted_password = fernet.decrypt(decrypted_password)
