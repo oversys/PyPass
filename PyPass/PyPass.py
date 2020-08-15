@@ -263,7 +263,7 @@ if does_file_exist("database"):
     print('"database.json" file has been found.')
 
     if does_file_exist("key"):
-        print('"key.key" file has been found')
+        print('"key.key" file has been found.')
         test_key()
     else:
         print('Key is not in this directory. Paste key here and relaunch program to attempt to validate it.')
