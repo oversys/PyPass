@@ -17,6 +17,7 @@ A simple Python Password Manager to allow you to save your passwords and interac
 * Increased security by doing the following:
   - Passwords are hidden when adding new accounts
   - Passwords are encrypted and only get decrypted when searching for an individual account or in the confirm to delete account prompt.
+* Database files from Build 1 will not work on Build 2+.
  
  ## Build 3
  * Re-structured the code (credits to hankhank10 - https://github.com/hankhank10/PyPass)
