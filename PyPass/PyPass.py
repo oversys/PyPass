@@ -48,7 +48,7 @@ def test_key():
         fernet = get_key()
         testing_string = 'testing string'.encode()
         testing_string = fernet.encrypt(testing_string)
-        print('Valid token provided, proceeding.')
+        print('Valid token provided, proceeding...')
         return
 
     # If the key is not valid, the program will return
