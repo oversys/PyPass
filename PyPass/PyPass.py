@@ -129,12 +129,28 @@ def add_account():
     global notes
 
     # Asking for information
-    website = input('Enter website name: ').lower()
-    username = input('Enter username: ')
-    password = gp.getpass('Enter password: ')
-    notes = input('Enter notes (If none, type "(N)o"): ')
+    try:
+        website = input('Enter website name: ')
+        username = input('Enter username: ')
+        password = gp.getpass('Enter password: ')
+        notes = input('Enter notes (If none, type "(N)o"): ')
+    except KeyboardInterrupt:
+        return
 
-    if notes.lower() == 'n' or 'no':
+    if website == '':
+        print('Website cannot be empty.')
+        return
+    if username == '':
+        print('Username cannot be empty.')
+        return
+    if password == '':
+        print('Password cannot be empty.')
+        return
+    if notes == '':
+        print('Notes cannot be empty. Input "n" or "No" to choose not to enter notes.')
+        return
+
+    if notes.lower() in ('n', 'no'):
         notes = 'User did not enter notes.'
 
     fernet = get_key()
@@ -163,6 +179,7 @@ def add_account():
 
 def specific_account(website, action="view"):
     data = load_database_from_file()
+    website = website.lower()
 
     # Looping through the accounts to find the account that the user is looking for
     for account in data["accounts"]:
@@ -179,16 +196,19 @@ def specific_account(website, action="view"):
             print('###########')
 
             if action == "delete":
-                # Confirmation
-                prompt = input('Are you sure you want to delete? This action cannot be undone(Y/N): ').lower()
-                if prompt == 'y':
-                    data["accounts"].remove(account)
-                    write_database_to_file(data)
-                    print('Account deleted.')
-                    print('###########\n')
-                else:
-                    print('Operation cancelled.')
-                    print('###########\n')
+                try:
+                    # Confirmation
+                    prompt = input('Are you sure you want to delete? This action cannot be undone(Y/N): ').lower()
+                    if prompt == 'y':
+                        data["accounts"].remove(account)
+                        write_database_to_file(data)
+                        print('Account deleted.')
+                        print('###########\n')
+                    else:
+                        print('Operation cancelled.')
+                        print('###########\n')
+                except KeyboardInterrupt:
+                    return
 
             return
 
@@ -200,7 +220,10 @@ def specific_account(website, action="view"):
 def select_operation():
     print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Delete Account\nD: Search For Account\nE: Exit\n')
     answer = 'e'
-    answer = input('Input operation letter: ').lower()
+    try:
+        answer = input('Input operation letter: ').lower()
+    except KeyboardInterrupt:
+        pass
 
     print('\n###########')
     if answer == 'a':
