@@ -10,22 +10,22 @@ A simple Python Password Manager to allow you to save your passwords and interac
 * Cut the "key.key" file and paste it somewhere in your machine that no one knows about.
 * This cut and paste back system is done as to prevent unauthorized access. In future updates, I may add an open file dialogue.
 
-## Build 1
+## Build 1 - August 13, 2020
 * Basic features released
 
-## Build 2
+## Build 2 - August 15, 2020
 * Increased security by doing the following:
   - Passwords are hidden when adding new accounts
   - Passwords are encrypted and only get decrypted when searching for an individual account or in the confirm to delete account prompt.
 * Database files from Build 1 will not work on Build 2+.
  
- ## Build 3
+ ## Build 3 - August 16, 2020
  * Re-structured the code (credits to hankhank10 - https://github.com/hankhank10/PyPass)
  * Program works differently now
  * Fixed a major security flaw
  * Removed the atexit library
  
- ## Build 4
+ ## Build 4 - August 16, 2020
   * Added huge "PyPass" text on program start
   * Fixed a few missing "."s
   * Website names are no longer saved in their ".lower()" version
@@ -33,3 +33,9 @@ A simple Python Password Manager to allow you to save your passwords and interac
   * Causing a Keyboard Interrupt in any of the information prompts of the "Add Account" feature will now send you back to the select operation menu
   * Causing a Keyboard Interrupt in the confirm to delete account prompt will now send you back to the select operation menu
   * Causing a Keyboard Interrupt in the select operation menu no longer throws an error, instead it will exit the program peacefully
+
+## Build 5 - August 20, 2020
+  * Added dates to new build version in the "README.MD" file
+  * Added confirm password prompt when adding new account
+  * Better exit handling implemented
+  * "#"s are no longer hardcoded, instead a new variable called "tag" was added with the content of "# * 10"
