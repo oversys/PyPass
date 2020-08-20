@@ -4,6 +4,7 @@ import getpass as gp
 from cryptography.fernet import Fernet
 
 file_to_check = None
+tags = '#' * 10
 
 
 def does_file_exist(which_file):
@@ -108,7 +109,7 @@ def view_accounts():
         return
     else:
         print(f'{str(number_of_accounts_loaded)} account(s) found!')
-        print('###########\n')
+        print(f'{tags}\n')
 
     # Attempts to print all accounts and their information
     for account in data["accounts"]:
@@ -117,7 +118,7 @@ def view_accounts():
         print(f'Password: {account.get("password")}')
         print(f'Notes: {account.get("notes")}')
 
-        print('###########\n')
+        print(f'{tags}\n')
 
     return
 
@@ -133,6 +134,7 @@ def add_account():
         website = input('Enter website name: ')
         username = input('Enter username: ')
         password = gp.getpass('Enter password: ')
+        confirm_password = gp.getpass('Confirm password: ')
         notes = input('Enter notes (If none, type "(N)o"): ')
     except KeyboardInterrupt:
         return
@@ -145,6 +147,9 @@ def add_account():
         return
     if password == '':
         print('Password cannot be empty.')
+        return
+    if password != confirm_password:
+        print('Passwords do not match.')
         return
     if notes == '':
         print('Notes cannot be empty. Input "n" or "No" to choose not to enter notes.')
@@ -172,7 +177,7 @@ def add_account():
     # Then write it back to the file
     write_database_to_file(data)
 
-    print('###########\n')
+    print(f'{tags}\n')
     print('Account has been successfully added to the database!')
     return
 
@@ -188,12 +193,12 @@ def specific_account(website, action="view"):
             decrypted_password = account.get("password").encode()
             decrypted_password = fernet.decrypt(decrypted_password)
             decrypted_password = decrypted_password.decode("utf-8")
-            print('###########')
+            print(tags)
             print('Website: ', account.get("website"))
             print('Username: ', account.get("username"))
             print('Password: ', decrypted_password)
             print('Notes: ', account.get("notes"))
-            print('###########')
+            print(tags)
 
             if action == "delete":
                 try:
@@ -203,17 +208,17 @@ def specific_account(website, action="view"):
                         data["accounts"].remove(account)
                         write_database_to_file(data)
                         print('Account deleted.')
-                        print('###########\n')
+                        print(f'{tags}\n')
                     else:
                         print('Operation cancelled.')
-                        print('###########\n')
+                        print(f'{tags}\n')
                 except KeyboardInterrupt:
                     return
 
             return
 
     print('Account not found!')
-    print('###########\n')
+    print(f'{tags}\n')
     return
 
 
@@ -225,7 +230,7 @@ def select_operation():
     except KeyboardInterrupt:
         pass
 
-    print('\n###########')
+    print(f'\n{tags}')
     if answer == 'a':
         view_accounts()
     if answer == 'b':
@@ -267,8 +272,11 @@ if does_file_exist("database"):
         test_key()
     else:
         print('Key is not in this directory. Paste key here and relaunch program to attempt to validate it.')
-        input()
-        exit()
+        try:
+            input()
+            exit()
+        except KeyboardInterrupt:
+            exit()
 else:
     if does_file_exist("key") == False:
         print("Key and database do not exist. Initiating first-time setup...")
