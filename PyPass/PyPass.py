@@ -191,7 +191,7 @@ def add_account():
 
                 # Filtering short password
                 if length < 8:
-                    print('Password too short.')
+                    print('Password too short, minimum characters are 8.')
                 else:
 
                     # Generating password
