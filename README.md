@@ -3,6 +3,7 @@ A simple Python Password Manager to allow you to save your passwords and interac
 
 # Instructions
 * Run the "PyPass.py" file.
+* Run the following command in the terminal of your OS: `pip install pyperclip`
 * On first time use, a "database.json" file will be generated along with a "key.key" file. Make sure to store this key, without it, you will be unable to access the "database.json" file (it is encrypted).
 * When you want to open the program, paste the "key.key" file in the "PyPass" directory.
 * The operations and actions are listed in the program.
@@ -39,3 +40,13 @@ A simple Python Password Manager to allow you to save your passwords and interac
   * Added confirm password prompt when adding new account
   * Better exit handling implemented
   * "#"s are no longer hardcoded, instead a new variable called "tag" was added with the content of "# * 10"
+
+## Build 6 - August 21, 2020
+  * Code is more consistent and is cleaner
+  * Added option to randomly generate passwords when adding account
+  * Fixed a bug regarding multiple choice selection
+  * Replaced "#"s with "—"s
+  * Added the following libraries: "secret", "string", "pyperclip"
+  * Users will now need to install the "pyperclip" library
+  * Added copy to clipboard feature when looking up a specific account (this needs "pyperclip")
+  * When adding new account, if the user accepted a generated password, the password will be copied to clipboard
