@@ -270,11 +270,6 @@ def specific_account(website, action="view"):
             print('Username: ', account.get("username"))
             print('Password: ', decrypted_password)
             print('Notes: ', account.get("notes"))
-            try:
-                pyperclip.copy(decrypted_password)
-                print('Password copied to clipboard!')
-            except:
-                print('"pyperclip" library not found, failed to copy password to clipboard.')
             print(tags)
 
             if action == "delete":
@@ -291,6 +286,12 @@ def specific_account(website, action="view"):
                         print(f'{tags}\n')
                 except KeyboardInterrupt:
                     return
+            else:
+                try:
+                    pyperclip.copy(decrypted_password)
+                    print('Password copied to clipboard!')
+                except:
+                    print('"pyperclip" library not found, failed to copy password to clipboard.')
 
             return
 
