@@ -1,10 +1,13 @@
-import json
 import os
+import json
+import string
+import secrets
+import pyperclip
 import getpass as gp
 from cryptography.fernet import Fernet
 
 file_to_check = None
-tags = '#' * 10
+tags = '—' * 10
 
 
 def does_file_exist(which_file):
@@ -113,7 +116,7 @@ def view_accounts():
 
     # Attempts to print all accounts and their information
     for account in data["accounts"]:
-        print(f'Website: {account.get("website")}')
+        print(f'Service: {account.get("website")}')
         print(f'Username: {account.get("username")}')
         print(f'Password: {account.get("password")}')
         print(f'Notes: {account.get("notes")}')
@@ -123,40 +126,109 @@ def view_accounts():
     return
 
 
+def generate_password(length):
+    alphabet = string.ascii_letters + string.digits + '!@#$%^&*?'
+    generated_password = ''.join(secrets.choice(alphabet) for i in range(length))
+    return generated_password
+
+
 notes = None
+password = None
 
 
 def add_account():
     global notes
+    global password
 
     # Asking for information
     try:
-        website = input('Enter website name: ')
+        # Website/Service Name
+        website = input('Enter service name: ')
+        if website == '':
+            print('Service name cannot be empty.')
+            return
+        
+        # Username
         username = input('Enter username: ')
-        password = gp.getpass('Enter password: ')
-        confirm_password = gp.getpass('Confirm password: ')
+        if username == '':
+            print('Username cannot be empty.')
+            return
+        
+        # Password prompt to select
+        password_prompt = input('Type "A" to Enter Password or "B" to Generate Password: ').lower()
+
+        # User-made password
+        if password_prompt == 'a':
+
+            # Asking for password
+            password = gp.getpass('Enter password: ')
+            if password == '':
+                print('Password cannot be empty.')
+                return
+            
+            # Confirming password
+            confirm_password = gp.getpass('Confirm password: ')
+            if password != confirm_password:
+                print('Passwords do not match.')
+                return
+        
+        # Randomly generated password
+        elif password_prompt == 'b':
+            accepted = None
+            while accepted != 'y':
+                print('Press CTRL + C to return to the main menu.')
+
+                # Asking for length
+                length = input('Length of new password: ')
+
+                # Converting length to integer
+                try:
+                    length = length(int)
+                except:
+                    print('Did not enter integer.')
+                    return
+
+                # Filtering short password
+                if length < 8:
+                    print('Password too short.')
+                    return
+                else:
+
+                    # Generating password
+                    generated_password = generate_password(length)
+
+                    # Confirming password choice
+                    print(f'Generated Password: {generated_password}')
+                    confirm = input('Proceed? (Y)es or (N)o: ').lower()
+
+                    # Handling confirm prompt
+                    if confirm in ('y', 'yes'):
+
+                        # Defining password and exiting loop
+                        password = generated_password
+                        try:
+                            pyperclip.copy(password)
+                            print('Password copied to clipboard!')
+                        except:
+                            print('"pyperclip" library not found, failed to copy password to clipboard.')
+                        accepted = 'y'
+
+                    # Invalid choice
+                    elif confirm not in ('n', 'no'):
+                        print('Invalid choice, returning to main menu.')
+                        return
+
+        # Notes
         notes = input('Enter notes (If none, type "(N)o"): ')
+        if notes == '':
+            print('Notes cannot be empty. Input "n" or "No" to choose not to enter notes.')
+            return
+        if notes.lower() in ('n', 'no'):
+            notes = 'User did not enter notes.'
+
+        # Collected Information, handling Keyboard Interrupts
     except KeyboardInterrupt:
         return
-
-    if website == '':
-        print('Website cannot be empty.')
-        return
-    if username == '':
-        print('Username cannot be empty.')
-        return
-    if password == '':
-        print('Password cannot be empty.')
-        return
-    if password != confirm_password:
-        print('Passwords do not match.')
-        return
-    if notes == '':
-        print('Notes cannot be empty. Input "n" or "No" to choose not to enter notes.')
-        return
-
-    if notes.lower() in ('n', 'no'):
-        notes = 'User did not enter notes.'
 
     fernet = get_key()
     encrypted_password = password.encode()
@@ -194,10 +266,15 @@ def specific_account(website, action="view"):
             decrypted_password = fernet.decrypt(decrypted_password)
             decrypted_password = decrypted_password.decode("utf-8")
             print(tags)
-            print('Website: ', account.get("website"))
+            print('Service: ', account.get("website"))
             print('Username: ', account.get("username"))
             print('Password: ', decrypted_password)
             print('Notes: ', account.get("notes"))
+            try:
+                pyperclip.copy(decrypted_password)
+                print('Password copied to clipboard!')
+            except:
+                print('"pyperclip" library not found, failed to copy password to clipboard.')
             print(tags)
 
             if action == "delete":
@@ -236,11 +313,12 @@ def select_operation():
     if answer == 'b':
         add_account()
     if answer == 'c':
-        website = input('Enter website name to delete: ').lower()
+        website = input('Enter service name to delete: ').lower()
         specific_account(website, "delete")
     if answer == 'd':
-        website = input('Enter website name to view: ').lower()
+        website = input('Enter service name to view: ').lower()
         specific_account(website)
+    
 
     return answer
 
@@ -290,7 +368,7 @@ else:
         print('Key is not in this directory. Paste key here and relaunch program to attempt to validate it.')
         question = input(
             'Alternatively, a new "database.json" file along with a key can be created. Do you wish to do so ( !! WARNING: ALL DATA WILL BE LOST !! )? (Y)es or (N)o?').lower()
-        if question == 'y' or 'yes':
+        if question in ('y', 'yes'):
             create_key()
             test_key()
             database_structure = {
