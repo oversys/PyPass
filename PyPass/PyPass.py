@@ -176,6 +176,7 @@ def add_account():
         elif password_prompt == 'b':
             accepted = None
             while accepted != 'y':
+                print(f'\n{tags}\n')
                 print('Press CTRL + C to return to the main menu.')
 
                 # Asking for length
@@ -183,7 +184,7 @@ def add_account():
 
                 # Converting length to integer
                 try:
-                    length = length(int)
+                    length = int(length)
                 except:
                     print('Did not enter integer.')
                     return
@@ -191,7 +192,6 @@ def add_account():
                 # Filtering short password
                 if length < 8:
                     print('Password too short.')
-                    return
                 else:
 
                     # Generating password
