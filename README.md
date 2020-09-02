@@ -54,7 +54,8 @@ A simple Python Password Manager to allow you to save your passwords and interac
 ## Build 7 - September 2, 2020
   * Added "Edit Account" feature that allows you to edit Username, Password, and notes.
   * Created "Assets" directory
-  * Imported the ".move()" function from the "shutil" library
+  * Added the following libraries: "move()" from "shutil", "urlopen()" from "urllib.request"
   * Cleaned up the code slightly by moving the "PYPASS" intro text to the Assets directory
   * Database file is now stored in the Assets directory
   * If the "database.json" file is still in the main directory, it will be moved automatically
+  * If the "Assets/text.txt" file is not found, it will automatically be retrieved from this repo. If the internet is disconnected then this process will fail.
