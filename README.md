@@ -11,7 +11,7 @@ A simple Python Password Manager to allow you to save your passwords and interac
 * Cut the "key.key" file and paste it somewhere in your machine that no one knows about.
 * This cut and paste back system is done as to prevent unauthorized access. In future updates, I may add an open file dialogue.
 
-## You may either download all the files in this repo or download the "PyPass.py" file and the necessary files will be created automatically (database.json, key.key for first time use. text.txt if not found).
+### You may either download all the files in this repo or download the "PyPass.py" file and the necessary files will be created automatically (database.json, key.key for first time use. text.txt if not found).
 
 ## Build 1 - August 13, 2020
 * Basic features released
