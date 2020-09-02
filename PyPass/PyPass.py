@@ -4,7 +4,11 @@ import string
 import secrets
 import pyperclip
 import getpass as gp
+from shutil import move
 from cryptography.fernet import Fernet
+
+if os.path.exists("database.json"):
+    move("database.json", "Assets")
 
 file_to_check = None
 tags = '—' * 10
@@ -13,7 +17,7 @@ tags = '—' * 10
 def does_file_exist(which_file):
     global file_to_check
     if which_file == "database":
-        file_to_check = "database.json"
+        file_to_check = "./Assets/database.json"
     if which_file == "key":
         file_to_check = "key.key"
 
@@ -63,7 +67,7 @@ def test_key():
 
 
 def load_database_from_file():
-    with open("database.json", 'rb') as database_file:
+    with open("./Assets/database.json", 'rb') as database_file:
         encrypted_data = database_file.read()
 
     fernet = get_key()
@@ -81,11 +85,11 @@ def load_database_from_file():
 
 
 def write_database_to_file(plaintext_data):
-    with open('database.json', 'w') as database_file:
+    with open("./Assets/database.json", 'w') as database_file:
         json.dump(plaintext_data, database_file, indent=2)
 
     # reload it and load into memory
-    with open("database.json", 'rb') as database_file:
+    with open("./Assets/database.json", 'rb') as database_file:
         data = database_file.read()
 
     # get the key
@@ -95,7 +99,7 @@ def write_database_to_file(plaintext_data):
     encrypted_database = fernet.encrypt(data)
 
     # Writes encrypted database
-    with open("database.json", 'wb') as f:
+    with open("./Assets/database.json", 'wb') as f:
         f.write(encrypted_database)
 
     return
@@ -140,6 +144,9 @@ def add_account():
     global notes
     global password
 
+    # Loads previous data from json file
+    data = load_database_from_file()
+
     # Asking for information
     try:
         # Website/Service Name
@@ -147,6 +154,11 @@ def add_account():
         if website == '':
             print('Service name cannot be empty.')
             return
+        
+        for account in data["accounts"]:
+            if account["website"].lower() == website.lower():
+                print('Service already exists in database!')
+                return
         
         # Username
         username = input('Enter username: ')
@@ -235,9 +247,6 @@ def add_account():
     encrypted_password = fernet.encrypt(encrypted_password)
     encrypted_password = encrypted_password.decode("utf-8")
 
-    # Loads previous data from json file
-    data = load_database_from_file()
-
     # Append the new data
     data["accounts"].append({
         "website": website,
@@ -286,6 +295,128 @@ def specific_account(website, action="view"):
                         print(f'{tags}\n')
                 except KeyboardInterrupt:
                     return
+            elif action == "modify":
+                try:
+                    print('Available modifications:\nA: Username\nB: Password\nC: Notes\nD: Cancel')
+                    print(f'{tags}\n')
+
+                    # Confirmation
+                    prompt = input('Enter detail to modify: ').lower()
+                    if prompt == 'a':
+                        new_username = input('Enter new username: ')
+                        if new_username != account.get("username"):
+                            if new_username == '':
+                                print('New username may not be empty.')
+                                return
+                            
+                            account["username"] = new_username
+                            write_database_to_file(data)
+                            print('Account modified successfully!')
+                            print(f'{tags}\n')
+                        else:
+                            print(f'{tags}')
+                            print('Usernames may not match.')
+                            print(f'{tags}\n')
+                            return
+                    if prompt == 'b':
+                        # Password prompt to select
+                        password_prompt = input('Type "A" to Enter Password or "B" to Generate Password: ').lower()
+
+                        # User-made password
+                        if password_prompt == 'a':
+                        
+                            # Asking for password
+                            new_password = gp.getpass('Enter new password: ')
+                            if new_password == '':
+                                print('Password cannot be empty.')
+                                return
+
+                            # Confirming password
+                            confirm_password = gp.getpass('Confirm password: ')
+                            if new_password != confirm_password:
+                                print('Passwords do not match.')
+                                return
+
+                        # Randomly generated password
+                        elif password_prompt == 'b':
+                            accepted = None
+                            while accepted != 'y':
+                                print(f'\n{tags}\n')
+                                print('Press CTRL + C to return to the main menu.')
+
+                                # Asking for length
+                                length = input('Length of new password: ')
+
+                                # Converting length to integer
+                                try:
+                                    length = int(length)
+                                except:
+                                    print('Did not enter integer.')
+                                    return
+
+                                # Filtering short password
+                                if length < 8:
+                                    print('Password too short, minimum characters are 8.')
+                                else:
+                                
+                                    # Generating password
+                                    generated_password = generate_password(length)
+
+                                    # Confirming password choice
+                                    print(f'Generated Password: {generated_password}')
+                                    confirm = input('Proceed? (Y)es or (N)o: ').lower()
+
+                                    # Handling confirm prompt
+                                    if confirm in ('y', 'yes'):
+                                    
+                                        # Defining password and exiting loop
+                                        new_password = generated_password
+                                        try:
+                                            pyperclip.copy(new_password)
+                                            print('Password copied to clipboard!')
+                                        except:
+                                            print('"pyperclip" library not found, failed to copy password to clipboard.')
+                                        accepted = 'y'
+
+                                    # Invalid choice
+                                    elif confirm not in ('n', 'no'):
+                                        print('Invalid choice, returning to main menu.')
+                                        return
+                            
+                            fernet = get_key()
+                            encrypted_password = new_password.encode()
+                            encrypted_password = fernet.encrypt(encrypted_password)
+                            encrypted_password = encrypted_password.decode("utf-8")
+                            account["password"] = encrypted_password
+                            write_database_to_file(data)
+                            print('Account modified successfully!')
+                            print(f'{tags}\n')
+                        else:
+                            print(f'{tags}')
+                            print('Passwords may not match.')
+                            print(f'{tags}\n')
+                            return
+                    if prompt == 'c':
+                        new_notes = input('Enter new notes: ')
+                        if new_notes != account.get("notes"):
+                            if new_notes == '':
+                                print('New notes may not be empty.')
+                                return
+                            
+                            account["notes"] = new_notes
+                            write_database_to_file(data)
+                            print('Account modified successfully!')
+                            print(f'{tags}\n')
+                        else:
+                            print(f'{tags}')
+                            print('Notes may not match.')
+                            print(f'{tags}\n')
+                            return
+                    else:
+                        print('Operation cancelled.')
+                        print(f'{tags}\n')
+                except KeyboardInterrupt:
+                    return
             else:
                 try:
                     pyperclip.copy(decrypted_password)
@@ -301,12 +432,12 @@ def specific_account(website, action="view"):
 
 
 def select_operation():
-    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Delete Account\nD: Search For Account\nE: Exit\n')
+    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Delete Account\nD: Search For Account\nE: Modify Account\nF: Exit\n')
     answer = 'e'
     try:
         answer = input('Input operation letter: ').lower()
     except KeyboardInterrupt:
-        pass
+        exit()
 
     print(f'\n{tags}')
     if answer == 'a':
@@ -314,32 +445,31 @@ def select_operation():
     if answer == 'b':
         add_account()
     if answer == 'c':
-        website = input('Enter service name to delete: ').lower()
+        try:
+            website = input('Enter service name to delete: ').lower()
+        except KeyboardInterrupt:
+            return
         specific_account(website, "delete")
     if answer == 'd':
-        website = input('Enter service name to view: ').lower()
+        try:
+           website = input('Enter service name to view: ').lower()
+        except KeyboardInterrupt:
+            return
         specific_account(website)
-    
+    if answer == 'e':
+        try:
+           website = input('Enter service name to modify: ').lower()
+        except KeyboardInterrupt:
+            return
+        specific_account(website, "modify")
 
     return answer
 
 
 # Main loop
 
-print('''
-───────────────────────────────────────────────────────────────────────────────────────────────
-─██████████████─████████──████████─██████████████─██████████████─██████████████─██████████████─
-─██░░░░░░░░░░██─██░░░░██──██░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─
-─██░░██████░░██─████░░██──██░░████─██░░██████░░██─██░░██████░░██─██░░██████████─██░░██████████─
-─██░░██──██░░██───██░░░░██░░░░██───██░░██──██░░██─██░░██──██░░██─██░░██─────────██░░██─────────
-─██░░██████░░██───████░░░░░░████───██░░██████░░██─██░░██████░░██─██░░██████████─██░░██████████─
-─██░░░░░░░░░░██─────████░░████─────██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─
-─██░░██████████───────██░░██───────██░░██████████─██░░██████░░██─██████████░░██─██████████░░██─
-─██░░██───────────────██░░██───────██░░██─────────██░░██──██░░██─────────██░░██─────────██░░██─
-─██░░██───────────────██░░██───────██░░██─────────██░░██──██░░██─██████████░░██─██████████░░██─
-─██░░██───────────────██░░██───────██░░██─────────██░░██──██░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─
-─██████───────────────██████───────██████─────────██████──██████─██████████████─██████████████─
-───────────────────────────────────────────────────────────────────────────────────────────────''')
+with open('./Assets/text.txt') as text_file:
+    print(text_file.read())
 
 print('Loading Assets...')
 
@@ -375,13 +505,13 @@ else:
             database_structure = {
                 "accounts": []
             }
-            os.remove("database.json")
+            os.remove("./Assets/database.json")
             write_database_to_file(database_structure)
         else:
             exit()
 
 function_to_run = None
-while function_to_run != "e":
+while function_to_run != "f":
     function_to_run = select_operation()
 
 print("Exiting...")
