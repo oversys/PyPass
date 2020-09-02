@@ -5,6 +5,7 @@ import secrets
 import pyperclip
 import getpass as gp
 from shutil import move
+from urllib.request import urlopen
 from cryptography.fernet import Fernet
 
 if os.path.exists("database.json"):
@@ -468,8 +469,21 @@ def select_operation():
 
 # Main loop
 
-with open('./Assets/text.txt') as text_file:
-    print(text_file.read())
+try:
+    with open('./Assets/text.txt') as text_file:
+        print(text_file.read())
+except:
+    try:
+        requested_text = urlopen("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/Assets/text.txt")
+        with open("./Assets/text.txt", 'w') as text_file:    
+            for line in requested_text:
+                text_file.write(f'{line.decode().strip()}\n')
+        
+        with open("./Assets/text.txt") as text_file:
+            print(text_file.read())
+    except:
+        print('"Assets/text.txt" file not found. Failed to retrieve file from GitHub repo. A re-attempt will be done when launching program next time.')
+
 
 print('Loading Assets...')
 
