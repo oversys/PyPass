@@ -50,3 +50,11 @@ A simple Python Password Manager to allow you to save your passwords and interac
   * Users will now need to install the "pyperclip" library
   * Added copy to clipboard feature when looking up a specific account (this needs "pyperclip")
   * When adding new account, if the user accepted a generated password, the password will be copied to clipboard
+
+## Build 7 - September 2, 2020
+  * Added "Edit Account" feature that allows you to edit Username, Password, and notes.
+  * Created "Assets" directory
+  * Imported the ".move()" function from the "shutil" library
+  * Cleaned up the code slightly by moving the "PYPASS" intro text to the Assets directory
+  * Database file is now stored in the Assets directory
+  * If the "database.json" file is still in the main directory, it will be moved automatically
