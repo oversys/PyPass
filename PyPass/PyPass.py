@@ -511,7 +511,7 @@ if fernet is None:
     except:
         print('Failed to access "key.key" file.')
         input()
-    exit()
+        exit()
 
 function_to_run = None
 while function_to_run != "f":
