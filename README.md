@@ -1,29 +1,27 @@
 # PyPass
-A simple Python Password Manager to allow you to save your passwords and interact with them. Features strong encryption with a 1-time key generation system.
+A simple Python Password Manager to allow you to securely save your usernames & passwords and interact with them. Features strong encryption with a 1-time key generation system.
 
 # Instructions
-* Open the `PyPass.py` file.
-* (Optional) If you wish to have "copy to clipboard" features then run `pip install pyperclip` in your terminal.
-* On first time use, a `database.json` file will be generated along with a `key.key` file. Make sure to store this key, without it, you will be unable to access the `database.json` file (it is encrypted).
-* When you want to open the program, paste the `key.key` file in the "PyPass" directory.
-* Once done with the program, cut the `key.key` file and hide it somewhere secure.
-* This cut and paste back system is done as to prevent unauthorized access.
+  * Open the `PyPass.py` file.
+  * (Optional) If you wish to have "copy to clipboard" features then run `pip install pyperclip` in your terminal.
+  * On first time use, a `database.json` file will be generated along with a `key.key` file. DO NOT LOSE THE `key.key` FILE.
+  * Make sure to hide the `key.key` file somewhere secure, you will be prompted to browse for the file and open it when you open the program.
 
 ### You may either download all the files in this repo or download the "PyPass.py" file and the necessary files will be created automatically (database.json, key.key for first time use. text.txt if not found).
 
 ## Build 1 - August 13, 2020
-* Basic features released
+  * Basic features released
 
 ## Build 2 - August 15, 2020
-* Increased security by doing the following:
-  - Passwords are hidden when adding new accounts
-  - Passwords are encrypted and only get decrypted when searching for an individual account or in the confirm to delete account prompt
-* Database files from Build 1 will not work on Build 2+
+  * Increased security by doing the following:
+    - Passwords are hidden when adding new accounts
+    - Passwords are encrypted and only get decrypted when searching for an individual account or in the confirm to delete account prompt
+  * Database files from Build 1 will not work on Build 2+
  
  ## Build 3 - August 16, 2020
- * Program re-written (credits to hankhank10 - https://github.com/hankhank10/PyPass)
- * Fixed a major security flaw
- * Removed the `atexit` library
+  * Program re-written (credits to hankhank10 - https://github.com/hankhank10/PyPass)
+  * Fixed a major security flaw
+  * Removed the `atexit` library
  
  ## Build 4 - August 16, 2020
   * Added "PyPass" title text on program start
@@ -35,7 +33,7 @@ A simple Python Password Manager to allow you to save your passwords and interac
   * Causing a Keyboard Interrupt in the select operation menu no longer throws an error, instead it will exit the program
 
 ## Build 5 - August 20, 2020
-  * Added dates to new build version in the "README.MD" file
+  * Added dates to new build version in the `README.MD` file
   * Added confirm password prompt when adding new account
   * Better exit handling implemented
   * "#"s are no longer hardcoded, instead a new variable called "tag" was added with the content of "# * 10"
@@ -58,3 +56,13 @@ A simple Python Password Manager to allow you to save your passwords and interac
   * Database file is now stored in the Assets directory
   * If the `database.json` file is still in the main directory, it will be moved automatically
   * If the `Assets/text.txt` file is not found, it will be automatically retrieved from this repo. If the internet is disconnected then this process will fail.
+
+## Build 8 - February 24, 2021
+  * Imported `filedialog` from `tkinter`
+  * Replaced the inconvenient cut-and-paste key system. Now, when you open the program and the `database.json` file exists, you will be prompted with a GUI to browse to and open     the `key.key` file.
+  * Reformatted and slighty modified the `README.MD` file
+  * Added option to "Reset Data" in the main menu (option X)
+  * Minor modifications to the "Main Loop" code
+  * Updated instructions
+  * Fixed the "PYPASS" title text appearing as irrelevant characters by changing the encoding to "utf-8" when opening the `text.txt` file
+  * Fixed the "PYPASS" title text failing to download when the `text.txt` file is missing
