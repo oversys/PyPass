@@ -66,3 +66,4 @@ A simple Python Password Manager to allow you to securely save your usernames & 
   * Updated instructions
   * Fixed the "PYPASS" title text appearing as irrelevant characters by changing the encoding to "utf-8" when opening the `text.txt` file
   * Fixed the "PYPASS" title text failing to download when the `text.txt` file is missing
+  * Major bug fixes within first-time setup
