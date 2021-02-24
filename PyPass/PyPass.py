@@ -7,11 +7,14 @@ import getpass as gp
 from shutil import move
 from urllib.request import urlopen
 from cryptography.fernet import Fernet
+from tkinter import filedialog
+from tkinter import Tk
 
 if os.path.exists("database.json"):
     move("database.json", "Assets")
 
 file_to_check = None
+fernet = None
 tags = '—' * 10
 
 
@@ -34,27 +37,22 @@ def create_key():
     with open("key.key", "wb") as key_file:
         key_file.write(key)
         # Instructions
-    print(
-        'Key, has been created. Check "key.key".\nInstructions:\n* Before you open the program, paste the valid key file in this directory.\n* The program will attempt to validate the key\n* If failed, the program will be terminated\n* Once the key is validated, the program will be usable\n* Remove key from this directory and hide it somewhere only you know (this is to prevent unauthorized access, the valid key is very difficult to crack, if possible anyway)\n!! DISCLAIMER: IF KEY IS LOST, YOU WILL NOT BE ABLE TO ACCESS THE DATABASE. You may open the key.key file in a text editor and save the key somewhere to re-create the key.key file.\nDO NOT SHARE THIS KEY WITH ANYONE TO AVOID UNAUTHORIZED ACCESS!')
+    print('Key, has been created. Check "key.key".\nInstructions:\n* Before you open the program, paste the valid key file in this directory.\n* The program will attempt to validate the key\n* If failed, the program will be terminated\n* Once the key is validated, the program will be usable\n* Remove key from this directory and hide it somewhere only you know (this is to prevent unauthorized access, the valid key is very difficult to crack, if possible anyway)\n!! DISCLAIMER: IF KEY IS LOST, YOU WILL NOT BE ABLE TO ACCESS THE DATABASE. You may open the key.key file in a text editor and save the key somewhere to re-create the key.key file.\nDO NOT SHARE THIS KEY WITH ANYONE TO AVOID UNAUTHORIZED ACCESS!')
 
 
 def get_key():
     # Accesses key
-    with open("key.key", "rb") as key_file:
+    global fernet
+    Tk().withdraw()
+    filename = filedialog.askopenfilename(filetypes=[("Key Files", "*.key")])
+    with open(filename, "rb") as key_file:
         key = key_file.read()
+    
     fernet = Fernet(key)
-    return fernet
 
 
 def test_key():
-    if does_file_exist("key") == False:
-        print('Key is not in this directory. Paste key here and relaunch program to attempt to validate it.')
-        input()
-        exit()
-
-    # If the key does exist in the directory, the program will attempt validate the key
     try:
-        fernet = get_key()
         testing_string = 'testing string'.encode()
         testing_string = fernet.encrypt(testing_string)
         print('Valid token provided, proceeding...')
@@ -71,7 +69,6 @@ def load_database_from_file():
     with open("./Assets/database.json", 'rb') as database_file:
         encrypted_data = database_file.read()
 
-    fernet = get_key()
     plaintext_data = fernet.decrypt(encrypted_data)
 
     with open("database_plaintext.json", 'wb') as database_file:
@@ -92,9 +89,6 @@ def write_database_to_file(plaintext_data):
     # reload it and load into memory
     with open("./Assets/database.json", 'rb') as database_file:
         data = database_file.read()
-
-    # get the key
-    fernet = get_key()
 
     # Encrypts database
     encrypted_database = fernet.encrypt(data)
@@ -242,8 +236,7 @@ def add_account():
         # Collected Information, handling Keyboard Interrupts
     except KeyboardInterrupt:
         return
-
-    fernet = get_key()
+    
     encrypted_password = password.encode()
     encrypted_password = fernet.encrypt(encrypted_password)
     encrypted_password = encrypted_password.decode("utf-8")
@@ -271,7 +264,6 @@ def specific_account(website, action="view"):
     # Looping through the accounts to find the account that the user is looking for
     for account in data["accounts"]:
         if account["website"].lower() == website:
-            fernet = get_key()
             decrypted_password = account.get("password").encode()
             decrypted_password = fernet.decrypt(decrypted_password)
             decrypted_password = decrypted_password.decode("utf-8")
@@ -384,7 +376,6 @@ def specific_account(website, action="view"):
                                         print('Invalid choice, returning to main menu.')
                                         return
                             
-                            fernet = get_key()
                             encrypted_password = new_password.encode()
                             encrypted_password = fernet.encrypt(encrypted_password)
                             encrypted_password = encrypted_password.decode("utf-8")
@@ -433,7 +424,7 @@ def specific_account(website, action="view"):
 
 
 def select_operation():
-    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Delete Account\nD: Search For Account\nE: Modify Account\nF: Exit\n')
+    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Delete Account\nD: Search For Account\nE: Modify Account\nX: Reset Data\nF: Exit\n')
     answer = 'e'
     try:
         answer = input('Input operation letter: ').lower()
@@ -443,26 +434,38 @@ def select_operation():
     print(f'\n{tags}')
     if answer == 'a':
         view_accounts()
-    if answer == 'b':
+    elif answer == 'b':
         add_account()
-    if answer == 'c':
+    elif answer == 'c':
         try:
             website = input('Enter service name to delete: ').lower()
         except KeyboardInterrupt:
             return
         specific_account(website, "delete")
-    if answer == 'd':
+    elif answer == 'd':
         try:
            website = input('Enter service name to view: ').lower()
         except KeyboardInterrupt:
             return
         specific_account(website)
-    if answer == 'e':
+    elif answer == 'e':
         try:
            website = input('Enter service name to modify: ').lower()
         except KeyboardInterrupt:
             return
         specific_account(website, "modify")
+    elif answer == 'x':
+        question = input('Are you sure you want to delete ALL data? Database will be deleted and the previously generated key.key file will no longer work. (Y)es or (N)o: ').lower()
+        if question in ('y', 'yes'):
+            create_key()
+            test_key()
+            database_structure = {
+                "accounts": []
+            }
+            os.remove("./Assets/database.json")
+            write_database_to_file(database_structure)
+        else:
+            return
 
     return answer
 
@@ -470,16 +473,16 @@ def select_operation():
 # Main loop
 
 try:
-    with open('./Assets/text.txt') as text_file:
+    with open('./Assets/text.txt', 'r', encoding='utf-8') as text_file:
         print(text_file.read())
 except:
     try:
         requested_text = urlopen("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/Assets/text.txt")
-        with open("./Assets/text.txt", 'w') as text_file:    
+        with open("./Assets/text.txt", 'w', encoding='utf-8') as text_file:    
             for line in requested_text:
                 text_file.write(f'{line.decode().strip()}\n')
         
-        with open("./Assets/text.txt") as text_file:
+        with open("./Assets/text.txt", 'r', encoding='utf-8') as text_file:
             print(text_file.read())
     except:
         print('"Assets/text.txt" file not found. Failed to retrieve file from GitHub repo. A re-attempt will be done when launching program next time.')
@@ -490,39 +493,22 @@ print('Loading Assets...')
 if does_file_exist("database"):
     print('"database.json" file has been found.')
 
-    if does_file_exist("key"):
-        print('"key.key" file has been found.')
-        test_key()
-    else:
-        print('Key is not in this directory. Paste key here and relaunch program to attempt to validate it.')
-        try:
-            input()
-            exit()
-        except KeyboardInterrupt:
-            exit()
 else:
-    if does_file_exist("key") == False:
-        print("Key and database do not exist. Initiating first-time setup...")
-        create_key()
-        test_key()
-        database_structure = {
-            "accounts": []
-        }
-        write_database_to_file(database_structure)
-    else:
-        print('Key is not in this directory. Paste key here and relaunch program to attempt to validate it.')
-        question = input(
-            'Alternatively, a new "database.json" file along with a key can be created. Do you wish to do so ( !! WARNING: ALL DATA WILL BE LOST !! )? (Y)es or (N)o?').lower()
-        if question in ('y', 'yes'):
-            create_key()
-            test_key()
-            database_structure = {
-                "accounts": []
-            }
-            os.remove("./Assets/database.json")
-            write_database_to_file(database_structure)
-        else:
-            exit()
+    print("Database does not exist. Initiating first-time setup...")
+    create_key()
+    test_key()
+    database_structure = {
+        "accounts": []
+    }
+    write_database_to_file(database_structure)
+
+try:
+    get_key()
+    print('"key.key" file has been found.')
+except:
+    print('Failed to access "key.key" file.')
+    input()
+    exit()
 
 function_to_run = None
 while function_to_run != "f":
