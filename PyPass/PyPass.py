@@ -504,12 +504,13 @@ else:
     }
     write_database_to_file(database_structure)
 
-try:
-    get_key()
-    print('"key.key" file has been found.')
-except:
-    print('Failed to access "key.key" file.')
-    input()
+if fernet is None:
+    try:
+        get_key()
+        print('"key.key" file has been found.')
+    except:
+        print('Failed to access "key.key" file.')
+        input()
     exit()
 
 function_to_run = None
