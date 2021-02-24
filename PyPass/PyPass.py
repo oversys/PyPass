@@ -212,7 +212,7 @@ def add_account():
 
                     # Confirming password choice
                     print(f'Generated Password: {generated_password}')
-                    confirm = input('Proceed? (Y)es or (N)o: ').lower()
+                    confirm = input('Proceed? (Y/N): ').lower()
 
                     # Handling confirm prompt
                     if confirm in ('y', 'yes'):
@@ -363,7 +363,7 @@ def specific_account(website, action="view"):
 
                                     # Confirming password choice
                                     print(f'Generated Password: {generated_password}')
-                                    confirm = input('Proceed? (Y)es or (N)o: ').lower()
+                                    confirm = input('Proceed? (Y/N): ').lower()
 
                                     # Handling confirm prompt
                                     if confirm in ('y', 'yes'):
@@ -430,7 +430,7 @@ def specific_account(website, action="view"):
 
 
 def select_operation():
-    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Delete Account\nD: Search For Account\nE: Modify Account\nX: Reset Data\nF: Exit\n')
+    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Search For Account\nD: Delete Account\nE: Modify Account\nX: Reset Data\nF: Exit\n')
     answer = 'e'
     try:
         answer = input('Input operation letter: ').lower()
@@ -444,16 +444,16 @@ def select_operation():
         add_account()
     elif answer == 'c':
         try:
-            website = input('Enter service name to delete: ').lower()
-        except KeyboardInterrupt:
-            return
-        specific_account(website, "delete")
-    elif answer == 'd':
-        try:
            website = input('Enter service name to view: ').lower()
         except KeyboardInterrupt:
             return
         specific_account(website)
+    elif answer == 'd':
+        try:
+            website = input('Enter service name to delete: ').lower()
+        except KeyboardInterrupt:
+            return
+        specific_account(website, "delete")
     elif answer == 'e':
         try:
            website = input('Enter service name to modify: ').lower()
@@ -461,7 +461,7 @@ def select_operation():
             return
         specific_account(website, "modify")
     elif answer == 'x':
-        question = input('Are you sure you want to delete ALL data? (Y)es or (N)o: ').lower()
+        question = input('Are you sure you want to delete ALL data? (Y/N): ').lower()
         if question in ('y', 'yes'):
             filename = filedialog.askopenfilename(title="Select key file", filetypes=[("Key Files", "*.key")])
             os.remove(filename)
