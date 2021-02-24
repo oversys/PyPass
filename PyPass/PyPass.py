@@ -10,6 +10,9 @@ from cryptography.fernet import Fernet
 from tkinter import filedialog
 from tkinter import Tk
 
+if not os.path.exists("./Assets"):
+        os.mkdir("./Assets")
+
 if os.path.exists("database.json"):
     move("database.json", "Assets")
 
@@ -32,19 +35,22 @@ def does_file_exist(which_file):
 
 
 def create_key():
+    global fernet
     # Creates master password, or key
     key = Fernet.generate_key()
     with open("key.key", "wb") as key_file:
         key_file.write(key)
         # Instructions
-    print('Key, has been created. Check "key.key".\nInstructions:\n* Before you open the program, paste the valid key file in this directory.\n* The program will attempt to validate the key\n* If failed, the program will be terminated\n* Once the key is validated, the program will be usable\n* Remove key from this directory and hide it somewhere only you know (this is to prevent unauthorized access, the valid key is very difficult to crack, if possible anyway)\n!! DISCLAIMER: IF KEY IS LOST, YOU WILL NOT BE ABLE TO ACCESS THE DATABASE. You may open the key.key file in a text editor and save the key somewhere to re-create the key.key file.\nDO NOT SHARE THIS KEY WITH ANYONE TO AVOID UNAUTHORIZED ACCESS!')
+    print('Key, has been created. Check "key.key".\nInstructions:\n* (Optional) If you wish to have "copy to clipboard" features then run pip install pyperclip in your terminal.\n* On first time use, a database.json file will be generated along with a key.key file. DO NOT LOSE ANY OF THOSE FILES.\n* Make sure to hide the key.key file somewhere secure, you will be prompted to browse for the file and open it when you open the program.')
+
+    fernet = Fernet(key)
 
 
 def get_key():
     # Accesses key
     global fernet
     Tk().withdraw()
-    filename = filedialog.askopenfilename(filetypes=[("Key Files", "*.key")])
+    filename = filedialog.askopenfilename(title="Select key file", filetypes=[("Key Files", "*.key")])
     with open(filename, "rb") as key_file:
         key = key_file.read()
     
@@ -455,15 +461,11 @@ def select_operation():
             return
         specific_account(website, "modify")
     elif answer == 'x':
-        question = input('Are you sure you want to delete ALL data? Database will be deleted and the previously generated key.key file will no longer work. (Y)es or (N)o: ').lower()
+        question = input('Are you sure you want to delete ALL data? (Y)es or (N)o: ').lower()
         if question in ('y', 'yes'):
-            create_key()
-            test_key()
-            database_structure = {
-                "accounts": []
-            }
+            filename = filedialog.askopenfilename(title="Select key file", filetypes=[("Key Files", "*.key")])
+            os.remove(filename)
             os.remove("./Assets/database.json")
-            write_database_to_file(database_structure)
         else:
             return
 
@@ -478,6 +480,7 @@ try:
 except:
     try:
         requested_text = urlopen("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/Assets/text.txt")
+
         with open("./Assets/text.txt", 'w', encoding='utf-8') as text_file:    
             for line in requested_text:
                 text_file.write(f'{line.decode().strip()}\n')
@@ -496,7 +499,6 @@ if does_file_exist("database"):
 else:
     print("Database does not exist. Initiating first-time setup...")
     create_key()
-    test_key()
     database_structure = {
         "accounts": []
     }
