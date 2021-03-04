@@ -7,8 +7,6 @@ A simple Python Password Manager to allow you to securely save your usernames & 
   * On first time use, a `database.json` file will be generated along with a `key.key` file. DO NOT LOSE ANY OF THOSE FILES.
   * Make sure to hide the `key.key` file somewhere secure, you will be prompted to browse for the file and open it when you open the program.
 
-### You may either download all the files in this repo or download the "PyPass.py" file and the necessary files will be created automatically (database.json, key.key for first time use. text.txt if not found).
-
 ## Build 1 - August 13, 2020
   * Basic features released
 
