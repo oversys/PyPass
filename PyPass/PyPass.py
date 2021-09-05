@@ -40,8 +40,8 @@ def create_key():
     key = Fernet.generate_key()
     with open("key.key", "wb") as key_file:
         key_file.write(key)
-        # Instructions
-    print('Key, has been created. Check "key.key".\nInstructions:\n* (Optional) If you wish to have "copy to clipboard" features then run pip install pyperclip in your terminal.\n* On first time use, a database.json file will be generated along with a key.key file. DO NOT LOSE ANY OF THOSE FILES.\n* Make sure to hide the key.key file somewhere secure, you will be prompted to browse for the file and open it when you open the program.')
+
+    print('Key, has been created.\nInstructions:\n* DO NOT LOSE ANY OF THE FILES.\n* Make sure to hide the key.key file somewhere secure, you will be prompted to browse for the file and open it when you open the program.')
 
     fernet = Fernet(key)
 
