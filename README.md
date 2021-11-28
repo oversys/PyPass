@@ -29,7 +29,7 @@ _Assuming you have downloaded and unzipped the folder._
  ```
  python3 PyPass.py
  ```
- #### On first time use, a `database.json` file will be generated along with a `key.key` file. __DO NOT LOSE ANY OF THOSE FILES.__
+ #### On first time use, a `database.json` file will be generated along with a `key.key` file. <u>DO NOT LOSE ANY OF THOSE FILES.</u>
  #### Make sure to hide the `key.key` file somewhere secure, you will be prompted to browse for the file and open it when you run the program.
 
 ## Version 1.0 - 13 August 2020
