@@ -1,24 +1,24 @@
 # PyPass
-A simple Python Password Manager to allow you to securely save your usernames & passwords and interact with them. Features encryption with a 1-time key generation system. (Python3 and Pip3 are required).
+A simple Python Password Manager to allow you to securely save your usernames & passwords and interact with them. Features encryption with a 1-time key generation system. (Python3 and Pip3 are required)
 
 # Instructions
 _Assuming you have downloaded and unzipped the folder._
 
   * (Required) Install cryptography library:
       #### Windows:
-          Run this in the command prompt: `pip install cryptography`
+      Run this in the command prompt: `pip install cryptography`
       #### Linux:
-          Run this in the terminal: `pip3 install cryptography`
+      Run this in the terminal: `pip3 install cryptography`
   * (Optional) Install pyperclip library for "copy to clipboard features":
       #### Windows:
-          Run this in the command prompt: `pip install pyperclip`
+      Run this in the command prompt: `pip install pyperclip`
       #### Linux:
-          Run this in the terminal: `pip3 install pyperclip`
+      Run this in the terminal: `pip3 install pyperclip`
   * Open the `PyPass.py` file:
       #### Windows:
-          Double click the `PyPass.py` file.
+      Double click the `PyPass.py` file.
       #### Linux:
-          Run this in the terminal (In the PyPass directory): `python3 PyPass.py`
+       Run this in the terminal (In the PyPass directory): `python3 PyPass.py`
   * On first time use, a `database.json` file will be generated along with a `key.key` file. DO NOT LOSE ANY OF THOSE FILES.
   * Make sure to hide the `key.key` file somewhere secure, you will be prompted to browse for the file and open it when you open the program.
 
