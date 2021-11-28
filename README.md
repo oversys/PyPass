@@ -1,23 +1,37 @@
 # PyPass
-A simple Python Password Manager to allow you to securely save your usernames & passwords and interact with them. Features encryption with a 1-time key generation system.
+A simple Python Password Manager to allow you to securely save your usernames & passwords and interact with them. Features encryption with a 1-time key generation system. (Python3 and Pip3 are required).
 
 # Instructions
-  * (Required) Run `pip install cryptography` (Windows) or `pip3 install cryptography` (Linux) in your terminal
-  * (Optional) If you wish to have "copy to clipboard" features then run `pip install pyperclip` (Windows) or `pip3 install pyperclip` (Linux) in your terminal
-  * Open the `PyPass.py` file. Windows: Double Click. Linux: Open the terminal in the PyPass folder and run `python3 PyPass.py`
+_Assuming you have downloaded and unzipped the folder._
+
+  * (Required) Install cryptography library:
+      ### Windows:
+          Run this in the command prompt: `pip install cryptography`
+      ### Linux:
+          Run this in the terminal: `pip3 install cryptography`
+  * (Optional) Install pyperclip library for "copy to clipboard features":
+      ### Windows:
+          Run this in the command prompt: `pip install pyperclip`
+      ### Linux:
+          Run this in the terminal: `pip3 install pyperclip`
+  * Open the `PyPass.py` file:
+      ### Windows:
+          Double click the `PyPass.py` file.
+      ### Linux:
+          Run this in the terminal (In the PyPass directory): `python3 PyPass.py`
   * On first time use, a `database.json` file will be generated along with a `key.key` file. DO NOT LOSE ANY OF THOSE FILES.
   * Make sure to hide the `key.key` file somewhere secure, you will be prompted to browse for the file and open it when you open the program.
 
-## Build 1 - 13 August 2020
+## Version 1.0 - 13 August 2020
   * Basic features released
 
-## Build 2 - 15 August 2020
+## Version 1.1 - 15 August 2020
   * Added new security features:
     - Passwords are hidden when adding new accounts
     - Passwords are encrypted and only get decrypted when searching for an individual account or deleting an account
-  * Database files from Build 1 will not work on Build 2+
+  * Database files from Version 1.0 will not work on Version 1.1+
  
- ## Build 3 - 16 August 2020
+ ## Version 2.0 - 16 August 2020
   * Program re-written (credits to hankhank10 - https://github.com/hankhank10/PyPass)
   * Fixed a major security flaw
   * Removed the `atexit` library
@@ -29,13 +43,13 @@ A simple Python Password Manager to allow you to securely save your usernames & 
   * Causing a Keyboard Interrupt in the confirm to delete account prompt will now send you back to the select operation menu
   * Causing a Keyboard Interrupt in the select operation menu no longer throws an error, instead it will exit the program
 
-## Build 4 - 20 August 2020
+## Version 2.1 - 20 August 2020
   * Added dates to new builds in the `README.MD` file
   * Added confirm password prompt when adding new account
   * Better exit handling implemented
   * "#"s are no longer hardcoded
 
-## Build 5 - 21 August 2020
+## Version 2.2 August 2020
   * Cleaned up the code to make it more consistent
   * Added an option to generate passwords when adding an account
   * Fixed a bug regarding multiple choice selection
@@ -44,7 +58,7 @@ A simple Python Password Manager to allow you to securely save your usernames & 
   * Decrypted passwords will automatically be copied to clipboard when searching for a specific account (This feature requires `pyperclip`)
   * When adding a new account, if the user accepted a generated password, the password will be copied to clipboard (This feature requires `pyperclip`)
 
-## Build 6 - 2 September 2020
+## Version 2.3 - 2 September 2020
   * Added "Edit Account" feature that allows you to edit username, password, and notes
   * Created "Assets" directory
   * Imported 2 features from 2 libraries: `move()` from `shutil`, `urlopen()` from `urllib.request`
@@ -53,7 +67,7 @@ A simple Python Password Manager to allow you to securely save your usernames & 
   * If the `database.json` file is still in the main directory, it will be moved automatically
   * If the `Assets/text.txt` file is not found, it will be automatically retrieved from this repo. If the internet is disconnected then this process will fail.
 
-## Build 7 - 24 February 2021
+## Version 3.0 - 24 February 2021
   * Imported `filedialog` from `tkinter`
   * Replaced the inconvenient cut-and-paste key system. Now, when you open the program and the `database.json` file exists, you will be prompted with a GUI to browse to and open the `key.key` file.
   * Reformatted and slighty modified the `README.MD` file
@@ -64,8 +78,14 @@ A simple Python Password Manager to allow you to securely save your usernames & 
   * Fixed the "PYPASS" title text failing to download when the `text.txt` file is missing
   * Major bug fixes within first-time setup code
   * Improved program consistency
-  * Switched between Search or Delete account options (C was deleted and D was search)
+  * Switched between Search or Delete account options (C was delete and D was search)
 
-## Build 8 - 5 September 2021
+## Version 3.1 - 5 September 2021
   * Modified the `README.MD` file. Dates are now written in the British format
   * Updated instructions
+
+## Version 3.2 - 5 September 2021
+  * Added a feature to allow you to generate a random password without changing the password of an existing account
+  * Updated instructions
+  * Updated `README.md` file
+  * Program no longer fails to launch if `pyperclip` library is not installed
