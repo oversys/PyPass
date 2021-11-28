@@ -5,19 +5,19 @@ A simple Python Password Manager to allow you to securely save your usernames & 
 _Assuming you have downloaded and unzipped the folder._
 
   * (Required) Install cryptography library:
-      #### Windows:
+      ### Windows:
       Run this in the command prompt: `pip install cryptography`
-      #### Linux:
+      ### Linux:
       Run this in the terminal: `pip3 install cryptography`
   * (Optional) Install pyperclip library for "copy to clipboard features":
-      #### Windows:
+      ### Windows:
       Run this in the command prompt: `pip install pyperclip`
-      #### Linux:
+      ### Linux:
       Run this in the terminal: `pip3 install pyperclip`
   * Open the `PyPass.py` file:
-      #### Windows:
+      ### Windows:
       Double click the `PyPass.py` file.
-      #### Linux:
+      ### Linux:
        Run this in the terminal (In the PyPass directory): `python3 PyPass.py`
   * On first time use, a `database.json` file will be generated along with a `key.key` file. DO NOT LOSE ANY OF THOSE FILES.
   * Make sure to hide the `key.key` file somewhere secure, you will be prompted to browse for the file and open it when you open the program.
