@@ -94,7 +94,7 @@ _Assuming you have downloaded and unzipped the folder._
   * Modified the `README.MD` file. Dates are now written in the British format
   * Updated instructions
 
-## Version 3.2 - 5 September 2021
+## Version 3.2 - 28 November 2021
   * Added a feature to allow you to generate a random password without changing the password of an existing account
   * Instructions have been rewritten
   * Revamped and reformatted the `README.md` file
