@@ -6,7 +6,10 @@ _Assuming you have downloaded and unzipped the folder._
 
   * (Required) Install cryptography library:
       ### Windows:
-      Run this in the command prompt: ```pip install cryptography```
+      Run this in the command prompt: 
+      ```
+      pip install cryptography
+      ```
       ### Linux:
       Run this in the terminal: `pip3 install cryptography`
   * (Optional) Install pyperclip library for "copy to clipboard features":
