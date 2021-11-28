@@ -2,13 +2,17 @@ import os
 import json
 import string
 import secrets
-import pyperclip
 import getpass as gp
 from shutil import move
 from urllib.request import urlopen
 from cryptography.fernet import Fernet
 from tkinter import filedialog
 from tkinter import Tk
+
+try:
+    import pyperclip
+except:
+    print("Could not import pyperclip module.")
 
 if not os.path.exists("./Assets"):
         os.mkdir("./Assets")
@@ -430,7 +434,7 @@ def specific_account(website, action="view"):
 
 
 def select_operation():
-    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Search For Account\nD: Delete Account\nE: Modify Account\nX: Reset Data\nF: Exit\n')
+    print('\nOperations:\nA: View Accounts\nB: Add Account\nC: Search For Account\nD: Delete Account\nE: Modify Account\nF: Generate Random Password\nG: Exit\nX: Reset Data\n')
     answer = 'e'
     try:
         answer = input('Input operation letter: ').lower()
@@ -460,12 +464,59 @@ def select_operation():
         except KeyboardInterrupt:
             return
         specific_account(website, "modify")
+    elif answer == 'f':
+        accepted = None
+        try:
+            while accepted != 'y':
+                print(f'\n{tags}\n')
+                print('Press CTRL + C to return to the main menu.')
+
+                # Asking for length
+                length = input('Length of new password: ')
+
+                # Converting length to integer
+                try:
+                    length = int(length)
+                except:
+                    print('Did not enter an integer.')
+                    return
+                
+                # Filtering password length
+                if length < 8:
+                    print('Password too short, minimum characters are 8.')
+                else:
+                    # Generate password
+                    generated_password = generate_password(length)
+
+                    # Confirm password choice
+                    print(f'Generated password: {generated_password}')
+                    confirm = input('Proceed? (Y/N): ').lower()
+
+                    # Handling confirm prompt
+                    if confirm in ('y', 'yes'):
+
+                        # Exit loop
+                        try:
+                            pyperclip.copy(password)
+                            print('Password copied to clipboard!')
+                            accepted = 'y'
+                        except:
+                            print('Pyperclip library not found.')
+                            accepted = 'y'
+                    elif confirm not in ('n', 'no'):
+                        print('Invalid choice, returning to main menu.')
+                        return
+        except KeyboardInterrupt:
+            return
+    elif answer == 'g':
+        exit()
     elif answer == 'x':
         question = input('Are you sure you want to delete ALL data? (Y/N): ').lower()
         if question in ('y', 'yes'):
             filename = filedialog.askopenfilename(title="Select key file", filetypes=[("Key Files", "*.key")])
             os.remove(filename)
             os.remove("./Assets/database.json")
+            exit()
         else:
             return
 
