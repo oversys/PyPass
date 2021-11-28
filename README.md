@@ -29,7 +29,7 @@ _Assuming you have downloaded and unzipped the folder._
  ```
  python3 PyPass.py
  ```
- #### On first time use, a `database.json` file will be generated along with a `key.key` file. <u>DO NOT LOSE ANY OF THOSE FILES.</u>
+ #### On first time use, a `database.json` file will be generated along with a `key.key` file. _DO NOT LOSE ANY OF THOSE FILES._
  #### Make sure to hide the `key.key` file somewhere secure, you will be prompted to browse for the file and open it when you run the program.
 
 ## Version 1.0 - 13 August 2020
@@ -96,6 +96,7 @@ _Assuming you have downloaded and unzipped the folder._
 
 ## Version 3.2 - 5 September 2021
   * Added a feature to allow you to generate a random password without changing the password of an existing account
-  * Updated instructions
-  * Updated `README.md` file
+  * Instructions have been rewritten
+  * Revamped and reformatted the `README.md` file
   * Program no longer fails to launch if `pyperclip` library is not installed
+  * Other bug fixes
