@@ -45,7 +45,7 @@ def create_key():
     with open("key.key", "wb") as key_file:
         key_file.write(key)
 
-    print('Key, has been created.\nInstructions:\n* DO NOT LOSE ANY OF THE FILES.\n* Make sure to hide the key.key file somewhere secure, you will be prompted to browse for the file and open it when you open the program.')
+    print('Key, has been created. Review the README.md file for the instructions.')
 
     fernet = Fernet(key)
 
