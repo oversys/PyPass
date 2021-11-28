@@ -4,13 +4,13 @@ A simple Python Password Manager to allow you to securely save your usernames & 
 # Instructions
 _Assuming you have downloaded and unzipped the folder._
 
-  * (Required) Install cryptography library:
-      ### Windows:
-      Run this in the command prompt: 
-      ```
-      pip install cryptography
-      ```
-      ### Linux:
+  ### (Required) Install cryptography library:
+  _Windows:_
+  Run this in the command prompt: 
+  ```
+  pip install cryptography
+  ```
+  Linux:
       Run this in the terminal: 
       ```
       pip3 install cryptography
