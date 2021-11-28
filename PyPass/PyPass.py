@@ -243,7 +243,7 @@ def add_account():
         if notes.lower() in ('n', 'no'):
             notes = 'User did not enter notes.'
 
-        # Collected Information, handling Keyboard Interrupts
+    # Collected Information, handling Keyboard Interrupts
     except KeyboardInterrupt:
         return
     
