@@ -5,7 +5,7 @@ A password manager written in Python. Data is encrypted using AES-128. Master pa
 #### I plan on adding a TUI (terminal user interface) to this program in the future.
 
 # Instructions
-_Assuming you have downloaded and unzipped the folder._
+_Assuming you have downloaded and unzipped the folder or cloned the repository._
 
  ### (Required) Install cryptography library:
  _Windows:_ Run this command in the command prompt: 
