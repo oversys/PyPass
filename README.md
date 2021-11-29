@@ -25,7 +25,7 @@ _Assuming you have downloaded and unzipped the folder._
  ```
  pip3 install pyperclip
  ```
- On some Linux systems, you may need to install a package called `xsel`.
+ On some Linux systems, if you have the `pyperclip` module installed but you still get a message saying that it is not installed, you may need to install a package called `xsel`.
  
  ### Open the `PyPass.py` file:
  _Windows:_ Double click the file
