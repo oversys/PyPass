@@ -25,7 +25,7 @@ _Assuming you have downloaded and unzipped the folder._
  ```
  pip3 install pyperclip
  ```
- On some Linux systems, if you have the `pyperclip` module installed but you still get a message saying that it is not installed, you may need to install a package called `xsel`.
+ On some Linux systems, you may need to install a package called `xclip`. You will be notified when the program attempts to copy a string to clipboard if that is the case.
  
  ### Open the `PyPass.py` file:
  _Windows:_ Double click the file
@@ -113,5 +113,7 @@ _Assuming you have downloaded and unzipped the folder._
   * Patched serious security vulnerabilities
   * PyPass title text is now hard coded into the main PyPass file
   * Some unnecessary modules were dropped
+  * Better Pyperclip exception handling
+  * Cleaner KeyboardInterrupt exception handling
   * Databases and keys generated before v4.0 will no longer work on newer versions
   * Updated instructions and `README.md` file
