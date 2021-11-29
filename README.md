@@ -1,8 +1,8 @@
 # PyPass
 A password manager written in Python. Data is encrypted using AES-128. Master password + salt are hashed using SHA-256 and the key is derived using PBKDF2. (Python3 and Pip3 are required)
 
-### You may encounter bugs while using this program. Feel free to open issues and/or pull requests.
-### I plan on adding a TUI (terminal user interface) to this program in the future.
+#### You may encounter bugs while using this program. Feel free to open issues and/or pull requests.
+#### I plan on adding a TUI (terminal user interface) to this program in the future.
 
 # Instructions
 _Assuming you have downloaded and unzipped the folder._
