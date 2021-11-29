@@ -36,6 +36,8 @@ def gen_pass():
             try:
                 pyperclip.copy(generated_password)
                 print("Password copied to clipboard!")
+            except pyperclip.PyperclipException:
+                print("Pyperclip requires the \"xclip\" package to be installed on Linux systems. Please install it to make use of the copy-to-clipboard features.")
             except:
                 print("\"Pyperclip\" library not found, failed to copy password to clipboard.")
             
@@ -149,6 +151,8 @@ def specific_account(key, data, service, action="view"):
             try:
                 pyperclip.copy(decrypted_password)
                 print("Password copied to clipboard!")
+            except pyperclip.PyperclipException:
+                print("Pyperclip requires the \"xclip\" package to be installed on Linux systems. Please install it to make use of the copy-to-clipboard features.")
             except:
                 print("\"Pyperclip\" library not found, failed to copy password to clipboard.")
 
