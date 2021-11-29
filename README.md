@@ -5,27 +5,29 @@ A simple Python Password Manager to allow you to securely save your usernames & 
 _Assuming you have downloaded and unzipped the folder._
 
  ### (Required) Install cryptography library:
- _Windows:_ Run this in the command prompt: 
+ _Windows:_ Run this command in the command prompt: 
  ```
  pip install cryptography
  ```
- _Linux:_ Run this in the terminal: 
+ _Linux:_ Run this command in the terminal: 
  ```
  pip3 install cryptography
  ```
  ### (Optional) Install pyperclip library for "copy to clipboard features":
- _Windows:_ Run this in the command prompt: 
+ _Windows:_ Run this command in the command prompt: 
  ```
  pip install pyperclip
  ```
- _Linux:_ Run this in the terminal: 
+ _Linux:_ Run this command in the terminal: 
  ```
  pip3 install pyperclip
  ```
+ On some Linux systems, you may need to install a package called `xsel`.
+ 
  ### Open the `PyPass.py` file:
  _Windows:_ Double click the file
   
- _Linux:_ Run this in the terminal (In the PyPass directory): 
+ _Linux:_ Run this command in the terminal (In the PyPass directory): 
  ```
  python3 PyPass.py
  ```
@@ -100,3 +102,12 @@ _Assuming you have downloaded and unzipped the folder._
   * Revamped and reformatted the `README.md` file
   * Program no longer fails to launch if `pyperclip` library is not installed
   * Other bug fixes
+
+## Version 4.0 - 29 November 2021
+  * Program has been completely rewritten from scratch and restructured so that it is split into multiple files
+  * A master key is now used (hashed with salt using SHA-256, key is derived using PBKDF2)
+  * Fixed inconsistencies and bugs
+  * Patched serious security vulnerabilities
+  * PyPass title text is now hard coded into the main PyPass file
+  * Some unnecessary modules were dropped
+  * Databases and keys generated before v4.0 will no longer work on newer versions
