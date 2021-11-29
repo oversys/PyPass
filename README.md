@@ -1,5 +1,8 @@
 # PyPass
-A simple Python Password Manager to allow you to securely save your usernames & passwords and interact with them. Features encryption with a 1-time key generation system. (Python3 and Pip3 are required)
+A password manager written in Python. Data is encrypted using AES-128. Master password + salt are hashed using SHA-256 and the key is derived using PBKDF2. (Python3 and Pip3 are required)
+
+### You may encounter bugs while using this program. Feel free to open issues and/or pull requests.
+### I plan on adding a TUI (terminal user interface) to this program in the future.
 
 # Instructions
 _Assuming you have downloaded and unzipped the folder._
@@ -111,3 +114,4 @@ _Assuming you have downloaded and unzipped the folder._
   * PyPass title text is now hard coded into the main PyPass file
   * Some unnecessary modules were dropped
   * Databases and keys generated before v4.0 will no longer work on newer versions
+  * Updated instructions and `README.md` file
