@@ -114,6 +114,6 @@ _Assuming you have downloaded and unzipped the folder or cloned the repository._
   * PyPass title text is now hard coded into the main PyPass file
   * Some unnecessary modules were dropped
   * Better Pyperclip exception handling
-  * Cleaner KeyboardInterrupt exception handling
+  * Better KeyboardInterrupt exception handling
   * Databases and keys generated before v4.0 will no longer work on newer versions
   * Updated instructions and `README.md` file
