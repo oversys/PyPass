@@ -1,13 +1,16 @@
 import os
+
+if not os.path.exists("./resources"):
+    print("Resources directory missing. Please clone the full repository from BetaLost/PyPass.")
+    input()
+    exit()
+
 import json
 from resources.get_key import get_key
 from resources.db_manager import *
 from resources.acc_manager import *
 
 tags = '—' * 10
-
-if not os.path.exists("./resources"):
-    print("Resources directory missing. Please clone the full repository from BetaLost/PyPass.")
 
 key = None
 try:
