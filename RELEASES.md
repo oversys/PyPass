@@ -78,3 +78,4 @@
   * Better KeyboardInterrupt exception handling
   * Databases and keys generated before v4.0 will no longer work on newer versions
   * Rewrote instructions and `README.md` file
+  * Changelog is now stored in the `RELEASES.md` file
