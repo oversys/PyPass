@@ -73,8 +73,8 @@
   * Fixed inconsistencies and bugs
   * Patched serious security vulnerabilities
   * PyPass title text is now hard coded into the main PyPass file
-  * Some unnecessary modules were dropped
+  * Multiple unnecessary modules were dropped
   * Better Pyperclip exception handling
   * Better KeyboardInterrupt exception handling
   * Databases and keys generated before v4.0 will no longer work on newer versions
-  * Updated instructions and `README.md` file
+  * Rewrote instructions and `README.md` file
