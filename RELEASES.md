@@ -84,4 +84,5 @@
   * Fixed typos in the `RELEASES.md` file
   * Fixed bugs when searching for a specific account
   * For security purposes, the plaintext password that is printed in the terminal when searching for a specific account will be hidden after 15 seconds
+  * For security purposes, you will be asked if you wish to copy the plaintext password to your clipboard
   * Added check for updates feature (updating the program is optional, the user will be asked if they wish to update)
