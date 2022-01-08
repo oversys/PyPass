@@ -27,11 +27,11 @@ def update():
                 open("./PyPass.py", "w").write(new_main_file)
 
                 print("Successfully updated PyPass!")
-                print(f"\n{tags}\n")
+                print(f"\n{tags}")
 
                 input()
                 exit()
-            except requests.ConnectError:
+            except requests.ConnectionError:
                 print("Failed to connect to the PyPass repository. Check your internet connection and try again.")
                 print(f"\n{tags}\n")
 
@@ -40,6 +40,5 @@ def update():
             print(f"\n{tags}\n")
 
     else:
-        print(f"\n{tags}\n")
         print(f"Already running the latest version! (Version {current_version})")
         print(f"\n{tags}\n")
