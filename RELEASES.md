@@ -79,3 +79,9 @@
   * Databases and keys generated before v4.0 will no longer work on newer versions
   * Rewrote instructions and `README.md` file
   * Changelog is now stored in the `RELEASES.md` file
+
+## Version 4.1 - 8 January 2022
+  * Fixed typos in the `RELEASES.md` file
+  * Fixed bugs when searching for a specific account
+  * For security purposes, the plaintext password that is printed in the terminal when searching for a specific account will be hidden after 15 seconds
+  * Added check for updates feature (updating the program is optional, the user will be asked if they wish to update)
