@@ -34,6 +34,6 @@ _Assuming you have downloaded and unzipped the folder or cloned the repository._
  ```
  python3 PyPass.py
  ```
- #### On first time use, a `database.json` file will be generated along with a `pw.json` file. _DO NOT LOSE ANY OF THOSE FILES._
+ #### On first time use, a `database.json` file will be generated along with a `pw.json` file. _DO NOT MODIFY/DELETE EITHER OF THOSE FILES._
 
 Check the [RELEASES.md](https://github.com/BetaLost/PyPass/blob/master/RELEASES.md) file for the update history and changelog.
