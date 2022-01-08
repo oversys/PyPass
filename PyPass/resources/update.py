@@ -2,8 +2,6 @@ import requests
 
 tags = '—' * 10
 
-# f
-
 def update():
     with open("./resources/version.txt") as file:
         current_version = float(file.read())
