@@ -2,6 +2,8 @@ import requests
 
 tags = '—' * 10
 
+# f
+
 def update():
     with open("./resources/version.txt") as file:
         current_version = float(file.read())
@@ -19,12 +21,14 @@ def update():
                 new_acc_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/acc_manager.py").content.decode()
                 new_db_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/db_manager.py").content.decode()
                 new_get_key = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/get_key.py").content.decode()
+                new_update_file = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/update.py").content.decode()
                 new_main_file = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/PyPass.py").content.decode()
 
                 open("./resources/version.txt", "w").write(f"{latest_version}")
                 open("./resources/acc_manager.py", "w").write(new_acc_manager)
                 open("./resources/db_manager.py", "w").write(new_db_manager)
                 open("./resources/get_key.py", "w").write(new_get_key)
+                open("./resources/update.py", "w").write(new_update_file)
                 open("./PyPass.py", "w").write(new_main_file)
 
                 print("Successfully updated PyPass!")
