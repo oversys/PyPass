@@ -1,16 +1,14 @@
 import os
-
-if not os.path.exists("./resources"):
-    print("Resources directory missing. Please clone the full repository from BetaLost/PyPass.")
-    input()
-    exit()
-
 import json
 from resources.get_key import get_key
 from resources.db_manager import *
 from resources.acc_manager import *
+from resources.update import *
 
 tags = '—' * 10
+
+if not os.path.exists("./resources"):
+    print("Resources directory missing. Please clone the full repository from BetaLost/PyPass.")
 
 key = None
 try:
@@ -47,9 +45,9 @@ print(title)
 
 operation = None
 
-while operation != "7":
+while operation != "8":
     try:
-        operation = input(f"\n{tags}\n1: View accounts\n2: Add account\n3: Search for account\n4: Modify account\n5: Delete account\n6: Generate random password\n7: Exit\nX: RESET DATA\n{tags}\n\nChoice: ").lower()
+        operation = input(f"\n{tags}\n1: View accounts\n2: Add account\n3: Search for account\n4: Modify account\n5: Delete account\n6: Generate random password\n7: Check for updates\n8: Exit\nX: RESET DATA\n{tags}\n\nChoice: ").lower()
     except KeyboardInterrupt:
         exit() 
 
@@ -94,6 +92,8 @@ while operation != "7":
             gen_pass()
         except KeyboardInterrupt:
             pass
+    elif operation == "7":
+        update()
     elif operation == "x":
         try:
             confirm = input("Are you sure you want to DELETE ALL DATA? This operation cannot be undone! (Y/N): ").lower() 
