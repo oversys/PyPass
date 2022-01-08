@@ -18,7 +18,7 @@ def update():
             try:
                 new_acc_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/acc_manager.py").content.decode()
                 new_db_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/db_manager.py").content.decode()
-                new_get_key = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/get_key.py").decode()
+                new_get_key = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/get_key.py").content.decode()
                 new_main_file = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/PyPass.py").content.decode()
 
                 open("./resources/acc_manager.py", "w").write(new_acc_manager)
