@@ -1,5 +1,6 @@
 import string
 import secrets
+import time
 import getpass as gp
 from cryptography.fernet import Fernet
 
@@ -144,17 +145,30 @@ def specific_account(key, data, service, action="view"):
             print(f"\n{tags}")
             print(f"Service: {account.get('service')}")
             print(f"Username: {account.get('username')}")
-            print(f"Password: {decrypted_password}")
             print(f"Notes: {account.get('notes')}")
+
+            try: 
+                for i in range(-15, 0):
+                    print(f"Password: {decrypted_password} (Removing in {abs(i)} seconds, press CTRL+C to skip.)", end="\r")
+                    time.sleep(1)
+                    print(" " * 99, end="\r")
+            except KeyboardInterrupt:
+                pass
+
+            print(" " * 99, end="\r")
+            print("Password: ********")
             print(f"{tags}\n")
 
-            try:
-                pyperclip.copy(decrypted_password)
-                print("Password copied to clipboard!")
-            except pyperclip.PyperclipException:
-                print("Pyperclip requires the \"xclip\" package to be installed on Linux systems. Please install it to make use of the copy-to-clipboard features.")
-            except:
-                print("\"Pyperclip\" library not found, failed to copy password to clipboard.")
+            confirm = input("Would you like to copy the password to clipboard? (Y/N): ").lower()
+
+            if confirm in ("y", "yes"):
+                try:
+                    pyperclip.copy(decrypted_password)
+                    print("Password copied to clipboard!")
+                except pyperclip.PyperclipException:
+                    print("Pyperclip requires the \"xclip\" package to be installed on Linux systems. Please install it to make use of the copy-to-clipboard features.")
+                except:
+                    print("\"Pyperclip\" library not found, failed to copy password to clipboard.")
 
             if action == "delete":
                 confirm = input("Are you sure you want to delete this account entry? This action cannot be undone (Y/N): ").lower()
@@ -224,6 +238,9 @@ def specific_account(key, data, service, action="view"):
                         account["notes"] = new_notes
                         print("Successfully changed notes!")
                         return data
+            else:
+                return
         
-        else:
-            print("Account not found.")
+    print(f"\n{tags}\n")
+    print("Account not found.")
+    print(f"\n{tags}\n")
