@@ -2,11 +2,11 @@
   * Encryption algorithm upgraded from AES-128 to AES-256 and the mode is GCM
   * Hashing algorithm upgraded from SHA-256 to SHA-512
   * The hash of the master password is no longer stored on the user's disk
+  * The master password is now validated by attempting to decrypt the database
   * Each password now has a unique nonce and authentication tag
   * Some core features were rewritten
   * Version is now stored in the `info.json` file instead of `version.txt`
   * Salt is now stored in the `info.json` file
-  * The master password is now validated by attempting to decrypt the database
   * Fernet is no longer used
   * Created a new module (`encryption_manager.py`) to manage encryption and decryption
   * Updates in the `RELEASES.md` file are now listed from latest to oldest
@@ -81,16 +81,14 @@
   * "#"s are no longer hardcoded
 
  ## Version 2.0 - 16 August 2020
-  * Program re-written (credits to hankhank10 - https://github.com/hankhank10/PyPass)
+  * Program re-written
   * Fixed a major security flaw
   * Removed the `atexit` library
   * Added "PyPass" title text on program start
   * Fixed a few typos
   * Website names are no longer saved in lowercase
   * Fixed all notes being saved as "User did not enter notes."
-  * Causing a Keyboard Interrupt in any of the information prompts of the "Add Account" feature will now send you back to the select operation menu
-  * Causing a Keyboard Interrupt in the confirm to delete account prompt will now send you back to the select operation menu
-  * Causing a Keyboard Interrupt in the select operation menu no longer throws an error, instead it will exit the program
+  * Implemented KeyboardInterrupt handling
 
 ## Version 1.1 - 15 August 2020
   * Added new security features:
