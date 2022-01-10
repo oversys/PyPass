@@ -4,7 +4,20 @@ A password manager written in Python. Data is encrypted using AES-256 GCM. Maste
 *Check the [RELEASES.md](https://github.com/BetaLost/PyPass/blob/master/RELEASES.md) file for the update history and changelog.*
 
 #### You may encounter bugs while using this program. Feel free to open issues and/or submit pull requests.
-#### I plan on adding a TUI (terminal user interface) to this program in the future.
+~~I plan on adding a TUI (terminal user interface) to this program in the future.~~ Idea scrapped due to operating system compatibility issues.
+
+## Features
+  #### Minimal Dependencies
+  Just one required dependency which is used for encryption and hashing and one optional dependency for copy-to-clipboard features.
+  
+  #### "Bulletproof" Encryption
+  Virtually impenetrable through means of brute-force attacks.
+  
+  #### Update Feature
+  You can update the program using a built-in feature rather than cloning this repository every time.
+  
+  #### Easy to use
+  Clear instructions and simple to operate.
 
 # Instructions
 _Assuming you have downloaded and unzipped the folder or cloned the repository._
