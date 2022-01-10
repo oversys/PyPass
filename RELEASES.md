@@ -10,6 +10,7 @@
   * Fernet is no longer used
   * Created a new module (`encryption_manager.py`) to manage encryption and decryption
   * Updates in the `RELEASES.md` file are now listed from latest to oldest
+  * Added features to `README.md` file
   * NOTE: Databases and keys generated before v5.0 will no longer work on newer versions
 
 ## Version 4.1 - 8 January 2022
