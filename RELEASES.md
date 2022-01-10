@@ -97,4 +97,5 @@
  * Salt is now stored in the `info.json` file
  * The master password is now validated by attempting to decrypt the database
  * Fernet is no longer used
+ * Created a new module (`encryption_manager.py`) to manage encryption and decryption
  * NOTE: Databases and keys generated before v5.0 will no longer work on newer versions
