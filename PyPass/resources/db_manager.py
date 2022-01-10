@@ -1,24 +1,20 @@
 import os
 import json
-from cryptography.fernet import Fernet
+from resources.encryption import *
 
 def load_db(key):
     if not os.path.exists("./resources/database.json"):
         return
     else:
-        fernet = Fernet(key)
-
-        with open("./resources/database.json", "rb") as db_file:
+        with open("./resources/database.json", "r") as db_file:
             encrypted_data = db_file.read()
         
-        decrypted_data = json.loads(fernet.decrypt(encrypted_data).decode())
+        decrypted_data = json.loads(decrypt(key, encrypted_data))
 
         return decrypted_data
 
 def write_db(key, plaintext_data):
-    fernet = Fernet(key)
-    
-    encrypted_data = fernet.encrypt(plaintext_data.encode())
+    encrypted_data = encrypt(key, plaintext_data)
 
-    with open("./resources/database.json", "wb") as db_file:
+    with open("./resources/database.json", "w") as db_file:
         db_file.write(encrypted_data)

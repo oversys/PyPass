@@ -2,7 +2,7 @@ import string
 import secrets
 import time
 import getpass as gp
-from cryptography.fernet import Fernet
+from resources.encryption import *
 
 try:
     import pyperclip
@@ -73,7 +73,6 @@ def view_accounts(data):
 def add_account(key, data):
     password = None
     notes = None
-    fernet = Fernet(key)
 
     service = input("Enter service name: ")
 
@@ -121,12 +120,10 @@ def add_account(key, data):
     if notes == "":
         notes = "User did not enter notes."
 
-    encrypted_password = fernet.encrypt(password.encode())
-
     data.get("accounts").append({
         "service": service,
         "username": username,
-        "password": encrypted_password.decode("utf-8"),
+        "password": encrypt(key, password),
         "notes": notes
         })
 
@@ -136,11 +133,10 @@ def add_account(key, data):
 
 def specific_account(key, data, service, action="view"):
     service = service.lower()
-    fernet = Fernet(key)
 
     for account in data.get("accounts"):
         if account.get("service").lower() == service:
-            decrypted_password = fernet.decrypt(account.get("password").encode()).decode("utf-8")
+            decrypted_password = decrypt(key, account.get("password"))
 
             print(f"\n{tags}")
             print(f"Service: {account.get('service')}")
@@ -156,7 +152,7 @@ def specific_account(key, data, service, action="view"):
                 pass
 
             print(" " * 99, end="\r")
-            print("Password: ********")
+            print("Password: **********")
             print(f"{tags}\n")
 
             confirm = input("Would you like to copy the password to clipboard? (Y/N): ").lower()
@@ -217,13 +213,13 @@ def specific_account(key, data, service, action="view"):
                         else:
                             return
 
-                    old_password = fernet.decrypt(account.get("password").encode()).decode()
+                    old_password = decrypt(key, account.get("password"))
 
                     if new_password != old_password:
                         confirm = input(f"Changed password to: {new_password}? (Y/N): ").lower()
 
                         if confirm in ("y", "yes"):
-                            encrypted_password = fernet.encrypt(new_password.encode()).decode()
+                            encrypted_password = encrypt(key, new_password)
                             account["password"] = encrypted_password
                             print("Successfully changed password!")
                             return data
