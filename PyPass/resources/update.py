@@ -17,16 +17,17 @@ def update():
 
         if confirm in ("y", "yes"):
             try:
+                new_encryption_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/encryption_manager.py").content.decode()
                 new_key_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/key_manager.py").content.decode()
                 new_acc_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/acc_manager.py").content.decode()
                 new_db_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/db_manager.py").content.decode()
                 new_update_file = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/update.py").content.decode()
                 new_main_file = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/PyPass.py").content.decode()
 
-                open("./resources/version.txt", "w").write(f"{latest_version}")
+                open("./resources/encryption_manager.py", "w").write(new_encryption_manager)
+                open("./resources/key_manager.py", "w").write(new_key_manager)
                 open("./resources/acc_manager.py", "w").write(new_acc_manager)
                 open("./resources/db_manager.py", "w").write(new_db_manager)
-                open("./resources/key_manager.py", "w").write(new_key_manager)
                 open("./resources/update.py", "w").write(new_update_file)
                 open("./PyPass.py", "w").write(new_main_file)
 

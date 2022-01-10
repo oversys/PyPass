@@ -2,7 +2,7 @@ import string
 import secrets
 import time
 import getpass as gp
-from resources.encryption import *
+from resources.encryption_manager import *
 
 try:
     import pyperclip

@@ -1,6 +1,6 @@
 import os
 import json
-from resources.encryption import *
+from resources.encryption_manager import *
 
 def load_db(key):
     if not os.path.exists("./resources/database.json"):
