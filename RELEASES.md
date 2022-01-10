@@ -5,7 +5,7 @@
   * Added new security features:
     - Passwords are hidden when adding new accounts
     - Passwords are encrypted and only get decrypted when searching for an individual account or deleting an account
-  * Database files from Version 1.0 will not work on Version 1.1+
+  * NOTE: Database files from Version 1.0 will not work on Version 1.1+
  
  ## Version 2.0 - 16 August 2020
   * Program re-written (credits to hankhank10 - https://github.com/hankhank10/PyPass)
@@ -76,9 +76,9 @@
   * Multiple unnecessary modules were dropped
   * Better Pyperclip exception handling
   * Better KeyboardInterrupt exception handling
-  * Databases and keys generated before v4.0 will no longer work on newer versions
   * Rewrote instructions and `README.md` file
   * Changelog is now stored in the `RELEASES.md` file
+  * NOTE: Databases and keys generated before v4.0 will no longer work on newer versions
 
 ## Version 4.1 - 8 January 2022
   * Fixed typos in the `RELEASES.md` file
@@ -86,3 +86,15 @@
   * For security purposes, the plaintext password that is printed in the terminal when searching for a specific account will be hidden after 15 seconds
   * For security purposes, you will be asked if you wish to copy the plaintext password to your clipboard
   * Added check for updates feature (updating the program is optional, the user will be asked if they wish to update)
+
+## Version 5.0 - 10 January 2022
+ * Encryption algorithm upgraded from AES-128 to AES-256 and the mode is GCM
+ * Hashing algorithm upgraded from SHA-256 to SHA-512
+ * The hash of the master password is no longer stored on the user's disk
+ * Each password now has a unique nonce and authentication tag
+ * Some core features were rewritten
+ * Version is now stored in the `info.json` file instead of `version.txt`
+ * Salt is now stored in the `info.json` file
+ * The master password is now validated by attempting to decrypt the database
+ * Fernet is no longer used
+ * NOTE: Databases and keys generated before v5.0 will no longer work on newer versions
