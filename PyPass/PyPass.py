@@ -1,6 +1,6 @@
 import os
 import json
-from resources.get_key import get_key
+from resources.key_manager import *
 from resources.db_manager import *
 from resources.acc_manager import *
 from resources.update import *
@@ -9,21 +9,19 @@ tags = '—' * 10
 
 if not os.path.exists("./resources"):
     print("Resources directory missing. Please clone the full repository from BetaLost/PyPass.")
+    exit()
 
 key = None
 try:
     key = get_key()
+    check_key(key)
 except KeyboardInterrupt:
     exit()
 
-if key != None and not os.path.exists("./resources/database.json"):
+if not os.path.exists("./resources/database.json"):
     data = {"accounts": []}
     json_data = json.dumps(data)
     write_db(key, json_data)
-elif key == None:
-    print("Incorrect master password..")
-    input()
-    exit()
 
 title = """
 ───────────────────────────────────────────────────────────────────────────────────────────────
@@ -100,10 +98,15 @@ while operation != "8":
 
             if confirm in ("y", "yes"):
                 os.remove("./resources/database.json")
-                os.remove("./resources/pw.json")
                 
-                print("All data has been deleted..")
-                input()
+                with open("./resources/info.json", "r+") as file:
+                    data = json.load(file)
+                    data["salt"] = None
+                    file.seek(0)
+                    json.dump(data, file)
+                    file.truncate()
+
+                print("All data has been deleted.")
                 exit()
         except KeyboardInterrupt:
             pass
