@@ -11,7 +11,7 @@ A password manager written in Python. Data is encrypted using AES-256 GCM. Maste
   #### Minimal Dependencies
   Just one required dependency which is used for encryption and hashing and one optional dependency for copy-to-clipboard features.
   
-  #### "Bulletproof" Encryption
+  #### "Bulletproof" Military-Grade Encryption
   Virtually impenetrable through means of brute-force attacks.
   
   #### Update Feature
