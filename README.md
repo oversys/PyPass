@@ -2,6 +2,7 @@
 A password manager written in Python. Data is encrypted using AES-256 GCM. Master password + salt are hashed using SHA-512 and the key is derived using PBKDF2. (Python3 and Pip3 are required)
 
 *Check the [RELEASES.md](https://github.com/BetaLost/PyPass/blob/master/RELEASES.md) file for the update history and changelog.*
+
 *DO NOT TAMPER WITH THE CODE UNLESS YOU HAVE A BACKUP OF THE `database.json` & `info.json` FILES!*
 
 #### You may encounter bugs while using this program. Feel free to open issues and/or submit pull requests.
