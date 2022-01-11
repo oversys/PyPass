@@ -6,7 +6,6 @@ A password manager written in Python. Data is encrypted using AES-256 GCM. Maste
 *DO NOT TAMPER WITH THE CODE UNLESS YOU HAVE A BACKUP OF THE `database.json` & `info.json` FILES!*
 
 #### You may encounter bugs while using this program. Feel free to open issues and/or submit pull requests.
-~~I plan on adding a TUI (terminal user interface) to this program in the future.~~ Idea scrapped due to operating system compatibility issues.
 
 ## Features
   #### Minimal Dependencies
