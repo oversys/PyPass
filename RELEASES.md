@@ -1,4 +1,4 @@
-## Version 5.1 - 10 January 2022
+## Version 5.1 - 20 January 2022
   * Changed prompt and added confirmation during first time setup when setting the master password
   * Added a feature to change the master password
   * Minor bug fixes
