@@ -1,3 +1,8 @@
+## Version 5.1 - 10 January 2022
+  * Changed prompt and added confirmation during first time setup when setting the master password
+  * Added a feature to change the master password
+  * Minor bug fixes
+
 ## Version 5.0 - 10 January 2022
   * Encryption algorithm upgraded from AES-128 to AES-256 and the mode is GCM
   * Hashing algorithm upgraded from SHA-256 to SHA-512
