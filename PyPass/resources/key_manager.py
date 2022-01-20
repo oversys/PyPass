@@ -4,11 +4,26 @@ import base64
 import getpass as gp
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from resources.db_manager import load_db
+from resources.db_manager import *
+from resources.encryption_manager import *
 
-def get_key():
-    master_pass = gp.getpass("Master password: ").encode()
-    salt = None
+def get_key(mode=None):
+    
+    if mode == "change":
+        master_pass = gp.getpass("New master password: ").encode()
+        confirm_master_pass = gp.getpass("Confirm new master password: ").encode()
+        if master_pass != confirm_master_pass:
+            print("Passwords do not match.")
+            return
+    elif os.path.exists("./resources/database.json"):
+        master_pass = gp.getpass("Master password: ").encode()
+    else:
+        master_pass = gp.getpass("Set master password (first time setup): ").encode()
+        confirm_master_pass = gp.getpass("Confirm master password (first time setup): ").encode()
+        
+        if master_pass != confirm_master_pass:
+            print("Passwords do not match.")
+            exit()
 
     with open("./resources/info.json", "r+") as file:
         data = json.load(file)
@@ -40,5 +55,25 @@ def check_key(key):
         load_db(key)
     except:
         print("Incorrect master password..")
-        exit()
+        return False
 
+def change_key():
+    key = get_key()
+    valid_key = check_key(key)
+    if valid_key == False:
+        return
+
+    new_key = get_key("change")
+    if new_key == None:
+        return
+
+    data = load_db(key)
+
+    for account in data.get("accounts"):
+        decrypted_password = decrypt(key, account.get("password"))
+        new_password = encrypt(new_key, decrypted_password)
+        account["password"] = new_password
+
+    write_db(new_key, json.dumps(data))
+    print("\nSuccessfully changed master password!")
+    exit()

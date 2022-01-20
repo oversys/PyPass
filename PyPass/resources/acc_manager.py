@@ -147,7 +147,7 @@ def specific_account(key, data, service, action="view"):
                 for i in range(-15, 0):
                     print(f"Password: {decrypted_password} (Removing in {abs(i)} seconds, press CTRL+C to skip.)", end="\r")
                     time.sleep(1)
-                    print(" " * 99, end="\r")
+                    print(" " * 50, end="\r")
             except KeyboardInterrupt:
                 pass
 
