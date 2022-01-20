@@ -14,7 +14,9 @@ if not os.path.exists("./resources"):
 key = None
 try:
     key = get_key()
-    check_key(key)
+    valid_key = check_key(key)
+    if valid_key == False:
+        exit()
 except KeyboardInterrupt:
     exit()
 
@@ -45,7 +47,7 @@ operation = None
 
 while operation != "8":
     try:
-        operation = input(f"\n{tags}\n1: View accounts\n2: Add account\n3: Search for account\n4: Modify account\n5: Delete account\n6: Generate random password\n7: Check for updates\n8: Exit\nX: RESET DATA\n{tags}\n\nChoice: ").lower()
+        operation = input(f"\n{tags}\n1: View accounts\n2: Add account\n3: Search for account\n4: Modify account\n5: Delete account\n6: Generate random password\n7: Check for updates\n8: Exit\nM: Change master password\nX: RESET DATA\n{tags}\n\nChoice: ").lower()
     except KeyboardInterrupt:
         exit() 
 
@@ -92,6 +94,11 @@ while operation != "8":
             pass
     elif operation == "7":
         update()
+    elif operation == "m":
+        try:
+            change_key()
+        except KeyboardInterrupt:
+            pass
     elif operation == "x":
         try:
             confirm = input("Are you sure you want to DELETE ALL DATA? This operation cannot be undone! (Y/N): ").lower() 
