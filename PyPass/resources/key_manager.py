@@ -15,6 +15,8 @@ def get_key(mode=None):
         if master_pass != confirm_master_pass:
             print("Passwords do not match.")
             return
+    elif mode == "pre_change":
+        master_pass = gp.getpass("Current master password: ").encode()
     elif os.path.exists("./resources/database.json"):
         master_pass = gp.getpass("Master password: ").encode()
     else:
@@ -43,7 +45,7 @@ def get_key(mode=None):
             algorithm=hashes.SHA512(),
             length=32,
             salt=salt,
-            iterations=100000
+            iterations=120000
             )
 
         key = kdf.derive(master_pass)
@@ -58,7 +60,7 @@ def check_key(key):
         return False
 
 def change_key():
-    key = get_key()
+    key = get_key("pre_change")
     valid_key = check_key(key)
     if valid_key == False:
         return
