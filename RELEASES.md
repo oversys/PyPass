@@ -3,6 +3,7 @@
   * Changed master password prompts depending on the situation (change master password, enter new master password during first time setup, enter current master password, et cetera)
   * Major bug fixes regarding modification of accounts (was broken due to unreachable code)
   * As a security measure, the terminal is now cleared after exiting the program
+  * Modified the `README.md` file and instructions
   * Increased the number of the iterations of the KDF function from 100K to 120K in compliance with the recommended settings of `PBKDF2-HMAC-SHA512` listed by [OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pbkdf2)
   * NOTE: Unfortunately, this means that databases and keys generated before v5.1 will no longer work on newer versions
 
