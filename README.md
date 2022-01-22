@@ -14,7 +14,7 @@ _DO NOT TAMPER WITH THE CODE UNLESS YOU HAVE A BACKUP OF THE `database.json` & `
   #### "Bulletproof" Military-Grade Encryption
   Virtually impenetrable through means of brute-force attacks.
   
-  #### Update Feature
+  #### Easy to update
   You can update the program using a built-in feature rather than cloning this repository every time.
   
   #### Easy to use
