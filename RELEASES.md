@@ -2,6 +2,8 @@
   * Changed prompt and added confirmation during first time setup when setting the master password
   * Added a feature to change the master password
   * Minor bug fixes
+  * Increased the number of the KDF function iterations from 100K to 120K in compliance with the recommended settings of `PBKD2-HMAC-SHA512` listed by (OWASP)[https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pbkdf2]
+  * NOTE: Unfortunately, this means that databases and keys generated before v5.1 will no longer work on newer versions
 
 ## Version 5.0 - 10 January 2022
   * Encryption algorithm upgraded from AES-128 to AES-256 and the mode is GCM
