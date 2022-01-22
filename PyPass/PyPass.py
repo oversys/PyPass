@@ -118,4 +118,8 @@ while operation != "8":
         except KeyboardInterrupt:
             pass
 
-print("\033c", end="")
+if os.name in ("nt", "dos"):
+    print("\n" * 1000) 
+    os.system("cls")
+else:
+    print("\033c", end="")
