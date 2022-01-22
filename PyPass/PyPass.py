@@ -118,4 +118,4 @@ while operation != "8":
         except KeyboardInterrupt:
             pass
 
-os.system('cls' if os.name == 'nt' else 'clear')
+os.system("clear||cls")
