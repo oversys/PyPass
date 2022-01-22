@@ -118,7 +118,4 @@ while operation != "8":
         except KeyboardInterrupt:
             pass
 
-if os.name == "nt":
-    os.system("cls")
-else:
-    print("\033c", end="")
+print("\033c", end="")
