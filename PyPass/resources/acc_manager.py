@@ -182,11 +182,14 @@ def specific_account(key, data, service, action="view"):
                     if new_username == "":
                         print("New username may not be empty.")
                         return
-                    elif new_username != account.get("username"):
+
+                    if new_username != account.get("username"):
                         account["username"] = new_username
                         print("Successfully changed username!")
                         return data
-
+                    else:
+                        print("New username cannot be the same as the old username.")
+                        return
                 elif modify_prompt == "2":
                     new_password = None
                     password_prompt = input(f"\n{tags}\n1: Enter password\n2: Generate password\n3: Cancel\n{tags}\n\nChoice: ").lower()
@@ -203,8 +206,7 @@ def specific_account(key, data, service, action="view"):
                             print('Passwords do not match.')
                             return
                             
-                            new_password = password
-
+                        new_password = password
                     elif password_prompt == "2":
                         new_password = gen_pass()
 
@@ -216,14 +218,13 @@ def specific_account(key, data, service, action="view"):
                     old_password = decrypt(key, account.get("password"))
 
                     if new_password != old_password:
-                        confirm = input(f"Changed password to: {new_password}? (Y/N): ").lower()
-
-                        if confirm in ("y", "yes"):
-                            encrypted_password = encrypt(key, new_password)
-                            account["password"] = encrypted_password
-                            print("Successfully changed password!")
-                            return data
-
+                        encrypted_password = encrypt(key, new_password)
+                        account["password"] = encrypted_password
+                        print("Successfully changed password!")
+                        return data
+                    else:
+                        print("New password cannot be the same as the old password.")
+                        return
                 elif modify_prompt == "3":
                     new_notes = input("Enter new notes: ")
 
@@ -234,6 +235,9 @@ def specific_account(key, data, service, action="view"):
                         account["notes"] = new_notes
                         print("Successfully changed notes!")
                         return data
+                    else:
+                        print("New notes cannot be the same as the old notes.")
+                        return
             else:
                 return
         
