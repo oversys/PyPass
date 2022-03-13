@@ -8,6 +8,8 @@
   * Fixed bugs related to account searching and modification
   * Replaced some if/else statements with Python 3.10 "match" statements
   * Changed the font of the "PYPASS" title text
+  * On Unix/Unix-Based systems, the "PYPASS" title text will be colored (may break if the terminal does not support ANSI escape codes)
+  * Added "PYPASS" logo in the `README.md` file
 
 ## Version 5.1 - 22 January 2022
   * Added a feature to change the master password
