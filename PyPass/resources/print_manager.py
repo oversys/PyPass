@@ -13,7 +13,7 @@ def print_actions():
     (7) Check For Updates
     (Q) Quit
     (M) Change Master Password
-    (X) RESET DATA\n{tags}\n\n""")
+    (X) RESET DATA\n{tags}\n""")
 
 def print_pwd_opts():
     tags = '—' * 25
@@ -21,7 +21,7 @@ def print_pwd_opts():
     print(f"""\n{tags}\nOptions List:
     (1) Enter Password
     (2) Generate Password
-    (C) Cancel\n{tags}\n\n""")
+    (C) Cancel\n{tags}\n""")
 
 def print_modify_opts():
     tags = '—' * 23
@@ -30,7 +30,7 @@ def print_modify_opts():
     (1) Modify Username
     (2) Modify Password
     (3) Modify Notes
-    (C) Cancel\n{tags}\n\n""")
+    (C) Cancel\n{tags}\n""")
 
 def clear():
     if os.name in ("nt", "dos"):
