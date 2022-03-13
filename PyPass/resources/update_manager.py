@@ -4,10 +4,12 @@ import requests
 tags = '—' * 10
 
 def update():
+    base_link = "https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass"
+
     with open("./resources/info.json", "r") as file:
         current_version = json.load(file).get("version")
 
-    latest_version = json.loads(requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/info.json").content.decode()).get("version")
+    latest_version = json.loads(requests.get(f"{base_link}/resources/info.json").content.decode()).get("version")
 
     print(f"\n{tags}\n")
 
@@ -17,13 +19,13 @@ def update():
 
         if confirm in ("y", "yes"):
             try:
-                new_encryption_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/encryption_manager.py").content.decode()
-                new_key_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/key_manager.py").content.decode()
-                new_acc_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/acc_manager.py").content.decode()
-                new_db_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/db_manager.py").content.decode()
-                new_print_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/print_manager.py").content.decode()
-                new_update_manager = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/resources/update_manager.py").content.decode()
-                new_main_file = requests.get("https://raw.githubusercontent.com/BetaLost/PyPass/master/PyPass/PyPass.py").content.decode()
+                new_encryption_manager = requests.get(f"{base_link}/resources/encryption_manager.py").content.decode()
+                new_key_manager = requests.get(f"{base_link}/resources/key_manager.py").content.decode()
+                new_acc_manager = requests.get(f"{base_link}/resources/acc_manager.py").content.decode()
+                new_db_manager = requests.get(f"{base_link}/resources/db_manager.py").content.decode()
+                new_print_manager = requests.get(f"{base_link}/resources/print_manager.py").content.decode()
+                new_update_manager = requests.get(f"{base_link}/resources/update_manager.py").content.decode()
+                new_main_file = requests.get(f"{base_link}/PyPass.py").content.decode()
 
                 open("./resources/encryption_manager.py", "w").write(new_encryption_manager)
                 open("./resources/key_manager.py", "w").write(new_key_manager)
