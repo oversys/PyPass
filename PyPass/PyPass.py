@@ -1,10 +1,15 @@
 import os
+import sys
 import json
 from resources.key_manager import *
 from resources.db_manager import *
 from resources.acc_manager import *
 from resources.print_manager import print_actions, clear
 from resources.update_manager import *
+
+if not sys.stdout.isatty():
+    print("The standard output of this program cannot be redirected or piped.")
+    exit()
 
 if not os.path.exists("./resources"):
     print("Resources directory missing. Please clone the full repository from BetaLost/PyPass.")
@@ -41,12 +46,11 @@ else:
 ██║        ██║   ██║     ██║  ██║███████║███████║
 ╚═╝        ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝"""
 
-print(title)
-
 action = None
 
 while action != "q":
     try:
+        print(title)
         print_actions()
         action = input("Enter choice: ").lower()
     except KeyboardInterrupt:

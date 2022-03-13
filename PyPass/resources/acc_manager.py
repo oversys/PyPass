@@ -164,7 +164,6 @@ def specific_account(key, data, service, action="view"):
                     print("Pyperclip requires the \"xclip\" package to be installed on Linux systems. Please install it to make use of the copy-to-clipboard features.")
                 except:
                     print("\"Pyperclip\" library not found, failed to copy password to clipboard.")
-                return
             if action == "delete":
                 confirm = input("Are you sure you want to delete this account entry? This action cannot be undone (Y/N): ").lower()
 
@@ -245,6 +244,8 @@ def specific_account(key, data, service, action="view"):
                             return
                     case _:
                         return
+
+        return
         
     print(f"\n{tags}\n")
     print("Account not found.")
