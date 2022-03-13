@@ -1,4 +1,4 @@
-<img src="https://github.com/BetaLost/PyPass/blob/master/logo.png?raw=true">
+# ![PyPass](logo.png)
 A password manager written in Python. Data is encrypted using AES-256-GCM and the key is derived using PBKDF2-HMAC-SHA512.
 
 _Check the [RELEASES.md](https://github.com/BetaLost/PyPass/blob/master/RELEASES.md) file for the update history and changelog._
