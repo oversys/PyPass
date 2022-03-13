@@ -68,7 +68,7 @@
   * Added option to "Reset Data" in the main menu (option X)
   * Minor modifications to the "Main Loop" code
   * Updated instructions
-  * Fixed the "PYPASS" title text appearing as irrelevant characters by changing the encoding to "utf-8" when opening the `text.txt` file
+  * Fixed the "PYPASS" title text appearing as broken characters by changing the encoding to "utf-8" when opening the `text.txt` file
   * Fixed the "PYPASS" title text failing to download when the `text.txt` file is missing
   * Major bug fixes within first-time setup code
   * Improved program consistency
