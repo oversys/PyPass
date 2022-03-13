@@ -7,6 +7,8 @@ _DO NOT TAMPER WITH THE CODE UNLESS YOU HAVE A BACKUP OF THE `database.json` & `
 
 #### You may encounter bugs while using this program. Feel free to open issues and/or submit pull requests.
 
+##### As of version 5.2, Python 3.10+ is required.
+
 ## Features
   #### Minimal Dependencies
   Just one required dependency which is used for encryption and hashing and one optional dependency for copy-to-clipboard features.
