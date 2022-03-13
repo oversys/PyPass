@@ -2,6 +2,7 @@
   * Modified the way options are printed and input is stored
   * Created a new module (`print_manager.py`) to handle printing text and clearing the terminal
   * Renamed the update module from `update.py` to `update_manager.py`
+  * Cleaned up the update module
   * Changed actions and options lists (new formatting, changed numbers & letters corresponding to actions/options)
   * Terminal is now cleared before and after every action to reduce clutter
   * Fixed bugs related to account searching and modification
