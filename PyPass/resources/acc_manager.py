@@ -245,7 +245,7 @@ def specific_account(key, data, service, action="view"):
                     case _:
                         return
 
-        return
+            return
         
     print(f"\n{tags}\n")
     print("Account not found.")
