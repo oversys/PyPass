@@ -41,7 +41,6 @@ def update():
                     file.truncate()
 
                 print("Successfully updated PyPass!")
-                print(f"\n{tags}")
                 exit()
             except requests.ConnectionError:
                 print("Failed to connect to the PyPass repository. Check your internet connection and try again.")
