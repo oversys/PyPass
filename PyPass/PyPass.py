@@ -4,7 +4,7 @@ from resources.key_manager import *
 from resources.db_manager import *
 from resources.acc_manager import *
 from resources.print_manager import print_actions, clear
-from resources.update import *
+from resources.update_manager import *
 
 if not os.path.exists("./resources"):
     print("Resources directory missing. Please clone the full repository from BetaLost/PyPass.")
@@ -105,8 +105,12 @@ while action != "q":
 
             input("Press return/enter to continue...")
         case "7":
-            clear()
-            update()
+            try:
+                clear()
+                update()
+            except KeyboardInterrupt:
+                pass
+
             input("Press return/enter to continue...")
         case "m":
             try:
