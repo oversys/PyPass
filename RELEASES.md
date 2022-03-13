@@ -43,7 +43,7 @@
   * Fixed inconsistencies and bugs
   * Patched serious security vulnerabilities
   * PyPass title text is now hard coded into the main PyPass file
-  * Multiple unnecessary modules were dropped
+  * Multiple unnecessary imports were dropped
   * Better Pyperclip exception handling
   * Better KeyboardInterrupt exception handling
   * Rewrote instructions and `README.md` file
