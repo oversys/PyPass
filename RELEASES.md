@@ -7,6 +7,7 @@
   * Terminal is now cleared before and after every action to reduce clutter
   * Fixed bugs related to account searching and modification
   * Replaced some if/else statements with Python 3.10 "match" statements
+  * Added a safeguard against redirecting or piping the output of the program
   * Changed the font of the "PYPASS" title text
   * On Unix/Unix-Based systems, the "PYPASS" title text will be colored (may break if the terminal does not support ANSI escape codes)
   * Added "PYPASS" logo in the `README.md` file
