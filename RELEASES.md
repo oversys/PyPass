@@ -1,3 +1,11 @@
+## Version 5.2 - 13 March 2022
+  * Modified the way options are printed and input is stored
+  * Created a seperate file to handle printing text and clearing the terminal
+  * Changed actions and options lists (new numbers & letters corresponding to actions/options)
+  * Terminal is now cleared before and after every action to reduce clutter
+  * Fixed bugs related to account searching and modification
+  * Replaced some if/else statements with Python 3.10 "match" statements
+
 ## Version 5.1 - 22 January 2022
   * Added a feature to change the master password
   * Changed master password prompts depending on the situation (change master password, enter new master password during first time setup, enter current master password, et cetera)
