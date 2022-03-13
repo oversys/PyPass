@@ -5,6 +5,7 @@
   * Terminal is now cleared before and after every action to reduce clutter
   * Fixed bugs related to account searching and modification
   * Replaced some if/else statements with Python 3.10 "match" statements
+  * Changed the font of the "PYPASS" title text
 
 ## Version 5.1 - 22 January 2022
   * Added a feature to change the master password
