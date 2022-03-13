@@ -1,7 +1,7 @@
 ## Version 5.2 - 13 March 2022
   * Modified the way options are printed and input is stored
-  * Created a seperate file to handle printing text and clearing the terminal
-  * Changed actions and options lists (new numbers & letters corresponding to actions/options)
+  * Created a new module (`print_manager.py`) to handle printing text and clearing the terminal
+  * Changed actions and options lists (new formatting, changed numbers & letters corresponding to actions/options)
   * Terminal is now cleared before and after every action to reduce clutter
   * Fixed bugs related to account searching and modification
   * Replaced some if/else statements with Python 3.10 "match" statements
@@ -20,7 +20,7 @@
   * Hashing algorithm upgraded from SHA-256 to SHA-512
   * The hash of the master password is no longer stored on the user's disk
   * The master password is now validated by attempting to decrypt the database
-  * Each password now has a unique nonce and authentication tag
+  * Each service entry & password now has a unique nonce and authentication tag
   * Some core features were rewritten
   * Version is now stored in the `info.json` file instead of `version.txt`
   * Salt is now stored in the `info.json` file
