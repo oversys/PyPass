@@ -3,6 +3,7 @@ import secrets
 import time
 import getpass as gp
 from resources.encryption_manager import *
+from resources.print_manager import print_pwd_opts, print_modify_opts
 
 try:
     import pyperclip
@@ -10,7 +11,6 @@ except:
     print("Could not import pyperclip module.")
 
 tags = '—' * 10
-
 
 def gen_pass():
     alphabet = string.ascii_letters + string.digits + '!@#$%^&*?'
@@ -53,12 +53,12 @@ def view_accounts(data):
     total_accounts = len(data.get("accounts"))
 
     if total_accounts == 0:
-        print(f"\n{tags}\nNo accounts found.\n{tags}\n")
+        print(f"{tags}\nNo accounts found.\n{tags}")
         return
     elif total_accounts == 1:
-        print(f"\n{tags}\n{str(total_accounts)} account found!\n{tags}\n")
+        print(f"{tags}\n{str(total_accounts)} account found!\n{tags}")
     else:
-        print(f"\n{tags}\n{str(total_accounts)} accounts found!\n{tags}\n")
+        print(f"{tags}\n{str(total_accounts)} accounts found!\n{tags}")
 
     for account in data.get("accounts"):
         print(f"Service: {account.get('service')}")
@@ -66,9 +66,8 @@ def view_accounts(data):
         print(f"Password: {account.get('password')}")
         print(f"Notes: {account.get('notes')}")
 
-        print(f"\n{tags}\n")
-    
-    return
+        print(tags)
+
 
 def add_account(key, data):
     password = None
@@ -91,29 +90,29 @@ def add_account(key, data):
         print("Username name cannot be empty.")
         return
 
-    password_prompt = input(f"\n{tags}\n1: Enter password\n2: Generate password\n3: Cancel\n{tags}\n\nChoice: ").lower()
+    print_pwd_opts()
+    password_prompt = input("Enter choice: ").lower()
 
-    if password_prompt == "1":
-        password = gp.getpass('Enter password: ')
+    match password_prompt:
+        case "1":
+            password = gp.getpass('Enter password: ')
 
-        if password == '':
-            print('Password cannot be empty.')
-            return
+            if password == '':
+                print('Password cannot be empty.')
+                return
+                
+            confirm_password = gp.getpass('Confirm password: ')
+
+            if password != confirm_password:
+                print('Passwords do not match.')
+                return
+        case "2":
+            password = gen_pass()
             
-        confirm_password = gp.getpass('Confirm password: ')
-
-        if password != confirm_password:
-            print('Passwords do not match.')
+            if password == None:
+                return
+        case _:
             return
-    
-    elif password_prompt == "2":
-        password = gen_pass()
-        
-        if password == None:
-            return
-
-    else:
-        return
 
     notes = input("Enter notes (Leave empty for no notes): ")
 
@@ -165,7 +164,7 @@ def specific_account(key, data, service, action="view"):
                     print("Pyperclip requires the \"xclip\" package to be installed on Linux systems. Please install it to make use of the copy-to-clipboard features.")
                 except:
                     print("\"Pyperclip\" library not found, failed to copy password to clipboard.")
-
+                return
             if action == "delete":
                 confirm = input("Are you sure you want to delete this account entry? This action cannot be undone (Y/N): ").lower()
 
@@ -174,72 +173,78 @@ def specific_account(key, data, service, action="view"):
                     print("Account deleted.")
                     return data
             elif action == "modify":
-                modify_prompt = input(f"\n{tags}\n1: Change username\n2: Change password\n3: Change notes\n4: Cancel\n{tags}\n\nChoice: ").lower()
+                print_modify_opts()
+                modify_prompt = input("Enter choice: ").lower()
 
-                if modify_prompt == "1":
-                    new_username = input("Enter new username: ")
+                match modify_prompt:
+                    case "1":
+                        new_username = input("Enter new username: ")
 
-                    if new_username == "":
-                        print("New username may not be empty.")
-                        return
-
-                    if new_username != account.get("username"):
-                        account["username"] = new_username
-                        print("Successfully changed username!")
-                        return data
-                    else:
-                        print("New username cannot be the same as the old username.")
-                        return
-                elif modify_prompt == "2":
-                    new_password = None
-                    password_prompt = input(f"\n{tags}\n1: Enter password\n2: Generate password\n3: Cancel\n{tags}\n\nChoice: ").lower()
-
-                    if password_prompt == "1":
-                        password = gp.getpass('Enter password: ')
-
-                        if password == '':
-                            print('Password cannot be empty.')
+                        if new_username == "":
+                            print("New username may not be empty.")
                             return
 
-                        confirm_password = gp.getpass('Confirm password: ')
-                        if password != confirm_password:
-                            print('Passwords do not match.')
-                            return
-                            
-                        new_password = password
-                    elif password_prompt == "2":
-                        new_password = gen_pass()
-
-                        if new_password == None:
-                            return
+                        if new_username != account.get("username"):
+                            account["username"] = new_username
+                            print("Successfully changed username!")
+                            return data
                         else:
+                            print("New username cannot be the same as the old username.")
                             return
+                    case "2":
+                        new_password = None
 
-                    old_password = decrypt(key, account.get("password"))
+                        print_pwd_opts()
+                        password_prompt = input("Enter choice: ").lower()
 
-                    if new_password != old_password:
-                        encrypted_password = encrypt(key, new_password)
-                        account["password"] = encrypted_password
-                        print("Successfully changed password!")
-                        return data
-                    else:
-                        print("New password cannot be the same as the old password.")
+                        match password_prompt:
+                            case "1":
+                                password = gp.getpass('Enter password: ')
+
+                                if password == '':
+                                    print('Password cannot be empty.')
+                                    return
+
+                                confirm_password = gp.getpass('Confirm password: ')
+                                if password != confirm_password:
+                                    print('Passwords do not match.')
+                                    return
+                                    
+                                new_password = password
+                            case "2":
+                                new_password = gen_pass()
+
+                                if new_password == None:
+                                    return
+                                else:
+                                    return
+
+                        old_password = decrypt(key, account.get("password"))
+
+                        if new_password != old_password:
+                            encrypted_password = encrypt(key, new_password)
+                            account["password"] = encrypted_password
+                            print("Successfully changed password!")
+                            return data
+                        else:
+                            print("New password cannot be the same as the old password.")
+                            return
+                    case "3":
+                        new_notes = input("Enter new notes (Leave empty for no notes): ")
+
+
+                        if new_notes != account.get("notes"):
+                            if new_notes == "":
+                                new_notes = "User did not enter notes."
+
+                            account["notes"] = new_notes
+                            print("Successfully changed notes!")
+                            return data
+                        else:
+                            print("New notes cannot be the same as the old notes.")
+                            return
+                    case _:
                         return
-                elif modify_prompt == "3":
-                    new_notes = input("Enter new notes: ")
-
-                    if new_notes != account.get("notes"):
-                        if new_notes == "":
-                            new_notes = "User did not enter notes."
-
-                        account["notes"] = new_notes
-                        print("Successfully changed notes!")
-                        return data
-                    else:
-                        print("New notes cannot be the same as the old notes.")
-                        return
-            else:
-                return
         
     print(f"\n{tags}\n")
     print("Account not found.")
