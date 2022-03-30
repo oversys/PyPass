@@ -1,3 +1,6 @@
+## Version 5.3 - 30 March 2022
+  * Added "About" option to check the current version without having to check for updates
+
 ## Version 5.2 - 13 March 2022
   * Modified the way options are printed and input is stored
   * Created a new module (`print_manager.py`) to handle printing text and clearing the terminal
