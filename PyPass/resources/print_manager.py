@@ -11,6 +11,7 @@ def print_actions():
     (5) Delete Account
     (6) Generate Random Password
     (7) Check For Updates
+    (8) About
     (Q) Quit
     (M) Change Master Password
     (X) RESET DATA\n{tags}\n""")
