@@ -124,6 +124,17 @@ while action != "q":
                 pass
 
             input("Press return/enter to continue...")
+        case "8":
+            clear()
+
+            with open("./resources/info.json", "r") as file:
+                current_version = json.load(file).get("version")
+
+            print(title)
+            print(f"Version {current_version}")
+            print("By Beta_Lost")
+
+            input("Press return/enter to continue...")
         case "m":
             try:
                 clear()
