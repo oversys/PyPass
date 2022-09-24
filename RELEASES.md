@@ -1,3 +1,7 @@
+## Version 5.4 - 24 September 2022
+  * Slightly modified the database format
+  * NOTE: Databases and keys generated before v5.4 will no longer work on newer versions
+
 ## Version 5.3 - 30 March 2022
   * Added "About" option to check the current version without having to check for updates
 
@@ -22,7 +26,7 @@
   * As a security measure, the terminal is now cleared after exiting the program
   * Modified the `README.md` file and instructions
   * Increased the number of the iterations of the KDF function from 100K to 120K in compliance with the recommended settings of `PBKDF2-HMAC-SHA512` listed by [OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pbkdf2)
-  * NOTE: Unfortunately, this means that databases and keys generated before v5.1 will no longer work on newer versions
+  * NOTE: Databases and keys generated before v5.1 will no longer work on newer versions
 
 ## Version 5.0 - 10 January 2022
   * Encryption algorithm upgraded from AES-128 to AES-256 and the mode is GCM
