@@ -50,7 +50,7 @@ def gen_pass():
             return
 
 def view_accounts(data):
-    total_accounts = len(data.get("accounts"))
+    total_accounts = len(data)
 
     if total_accounts == 0:
         print(f"{tags}\nNo accounts found.\n{tags}")
@@ -60,7 +60,7 @@ def view_accounts(data):
     else:
         print(f"{tags}\n{str(total_accounts)} accounts found!\n{tags}")
 
-    for account in data.get("accounts"):
+    for account in data:
         print(f"Service: {account.get('service')}")
         print(f"Username: {account.get('username')}")
         print(f"Password: {account.get('password')}")
@@ -75,7 +75,7 @@ def add_account(key, data):
 
     service = input("Enter service name: ")
 
-    for account in data.get("accounts"):
+    for account in data:
         if account.get("service").lower() == service.lower():
             print("Service already exists in database!")
             return
@@ -119,7 +119,7 @@ def add_account(key, data):
     if notes == "":
         notes = "User did not enter notes."
 
-    data.get("accounts").append({
+    data.append({
         "service": service,
         "username": username,
         "password": encrypt(key, password),
@@ -133,7 +133,7 @@ def add_account(key, data):
 def specific_account(key, data, service, action="view"):
     service = service.lower()
 
-    for account in data.get("accounts"):
+    for account in data:
         if account.get("service").lower() == service:
             decrypted_password = decrypt(key, account.get("password"))
 
@@ -168,7 +168,7 @@ def specific_account(key, data, service, action="view"):
                 confirm = input("Are you sure you want to delete this account entry? This action cannot be undone (Y/N): ").lower()
 
                 if confirm in ("y", "yes"):
-                    data.get("accounts").remove(account)
+                    data.remove(account)
                     print("Account deleted.")
                     return data
             elif action == "modify":
