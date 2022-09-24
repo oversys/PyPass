@@ -27,7 +27,7 @@ except KeyboardInterrupt:
 clear()
 
 if not os.path.exists("./resources/database.json"):
-    data = {"accounts": []}
+    data = []
     json_data = json.dumps(data)
     write_db(key, json_data)
 
