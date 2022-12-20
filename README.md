@@ -35,7 +35,7 @@ _Assuming you have downloaded and unzipped the folder or cloned the repository. 
  ```
  pip3 install pyperclip
  ```
- On some Linux systems, you may need to install a package called `xclip`. You will be notified when the program attempts to copy a string to clipboard if that is the case. Consult your distrobution's wiki for instructions on installing packages if you do not know how to do that.
+ On some Linux systems, you may need to install a package called `xclip`. You will be notified when the program attempts to copy a string to clipboard if that is the case. Consult your distribution's wiki for instructions on installing packages if you do not know how to do that.
  
  ### Open the `PyPass.py` file:
  _Windows & Linux:_ Run this command in the terminal (in the directory that contains the main `PyPass.py` file): 
