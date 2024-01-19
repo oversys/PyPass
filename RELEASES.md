@@ -1,3 +1,6 @@
+## Version 5.5 - 19 January 2024
+  * Fixed error when changing the master password
+
 ## Version 5.4 - 24 September 2022
   * Slightly modified the database format
   * NOTE: Databases and keys generated before v5.4 will no longer work on newer versions
