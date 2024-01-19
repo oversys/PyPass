@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import readline
 from resources.key_manager import *
 from resources.db_manager import *
 from resources.acc_manager import *
