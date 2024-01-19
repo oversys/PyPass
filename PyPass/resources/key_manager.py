@@ -71,7 +71,7 @@ def change_key():
 
     data = load_db(key)
 
-    for account in data.get("accounts"):
+    for account in data:
         decrypted_password = decrypt(key, account.get("password"))
         new_password = encrypt(new_key, decrypted_password)
         account["password"] = new_password
