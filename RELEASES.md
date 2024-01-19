@@ -1,5 +1,6 @@
 ## Version 5.5 - 19 January 2024
   * Fixed error when changing the master password
+  * Imported `readline` library for improved arrow key functionality (up arrow for previous input, etc)
 
 ## Version 5.4 - 24 September 2022
   * Slightly modified the database format
