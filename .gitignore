@@ -1,0 +1,4 @@
+.DS_Store
+database.json
+/PyPass/resources/info.json
+/PyPass/resources/__pycache__

@@ -53,7 +53,7 @@ while action != "q":
     try:
         print(title)
         print_actions()
-        action = input("Enter choice: ").lower()
+        action = input("Enter choice: ").lower().strip()
     except KeyboardInterrupt:
         action = "q"
 
@@ -81,7 +81,7 @@ while action != "q":
         case "3":
             try:
                 clear()
-                service = input("Service name to search: ")
+                service = input("Service name to search: ").strip()
                 specific_account(key, load_db(key), service)
             except KeyboardInterrupt:
                 pass
@@ -90,7 +90,7 @@ while action != "q":
         case "4":
             try:
                 clear()
-                service = input("Service name to modify: ")
+                service = input("Service name to modify: ").strip()
                 data = specific_account(key, load_db(key), service, "modify")
                 if data != None:
                     write_db(key, json.dumps(data))
@@ -101,7 +101,7 @@ while action != "q":
         case "5":
             try:
                 clear()
-                service = input("Service name to delete: ")
+                service = input("Service name to delete: ").strip()
                 data = specific_account(key, load_db(key), service, "delete")
                 if data != None:
                     write_db(key, json.dumps(data))
@@ -147,7 +147,7 @@ while action != "q":
         case "x":
             try:
                 clear()
-                confirm = input("Are you sure you want to DELETE ALL DATA? This action cannot be undone! (Y/N): ").lower() 
+                confirm = input("Are you sure you want to DELETE ALL DATA? This action cannot be undone! (Y/N): ").lower().strip()
 
                 if confirm in ("y", "yes"):
                     os.remove("./resources/database.json")

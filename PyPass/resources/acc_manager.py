@@ -19,7 +19,7 @@ def gen_pass():
     while accepted != "y":
         print(f"\n{tags}\n")
 
-        length = input("Password length: ")
+        length = input("Password length: ").strip()
 
         try:
             length = int(length)
@@ -31,7 +31,7 @@ def gen_pass():
                                      for i in range(length))
 
         print(f"Generated password: {generated_password}")
-        confirm = input("Accept password? (Y/N): ").lower()
+        confirm = input("Accept password? (Y/N): ").lower().strip()
 
         if confirm in ("y", "yes"):
             try:
@@ -73,7 +73,7 @@ def add_account(key, data):
     password = None
     notes = None
 
-    service = input("Enter service name: ")
+    service = input("Enter service name: ").strip()
 
     for account in data:
         if account.get("service").lower() == service.lower():
@@ -84,14 +84,14 @@ def add_account(key, data):
         print("Service name cannot be empty.")
         return
 
-    username = input("Enter username: ")
+    username = input("Enter username: ").strip()
 
     if username == '':
         print("Username name cannot be empty.")
         return
 
     print_pwd_opts()
-    password_prompt = input("Enter choice: ").lower()
+    password_prompt = input("Enter choice: ").lower().strip()
 
     match password_prompt:
         case "1":
@@ -114,7 +114,7 @@ def add_account(key, data):
         case _:
             return
 
-    notes = input("Enter notes (Leave empty for no notes): ")
+    notes = input("Enter notes (Leave empty for no notes): ").strip()
 
     if notes == "":
         notes = "User did not enter notes."
@@ -154,7 +154,7 @@ def specific_account(key, data, service, action="view"):
             print("Password: **********")
             print(f"{tags}\n")
 
-            confirm = input("Would you like to copy the password to clipboard? (Y/N): ").lower()
+            confirm = input("Would you like to copy the password to clipboard? (Y/N): ").lower().strip()
 
             if confirm in ("y", "yes"):
                 try:
@@ -165,7 +165,7 @@ def specific_account(key, data, service, action="view"):
                 except:
                     print("\"Pyperclip\" library not found, failed to copy password to clipboard.")
             if action == "delete":
-                confirm = input("Are you sure you want to delete this account entry? This action cannot be undone (Y/N): ").lower()
+                confirm = input("Are you sure you want to delete this account entry? This action cannot be undone (Y/N): ").lower().strip()
 
                 if confirm in ("y", "yes"):
                     data.remove(account)
@@ -177,7 +177,7 @@ def specific_account(key, data, service, action="view"):
 
                 match modify_prompt:
                     case "1":
-                        new_username = input("Enter new username: ")
+                        new_username = input("Enter new username: ").strip()
 
                         if new_username == "":
                             print("New username may not be empty.")
@@ -229,7 +229,7 @@ def specific_account(key, data, service, action="view"):
                             print("New password cannot be the same as the old password.")
                             return
                     case "3":
-                        new_notes = input("Enter new notes (Leave empty for no notes): ")
+                        new_notes = input("Enter new notes (Leave empty for no notes): ").strip()
 
 
                         if new_notes != account.get("notes"):
