@@ -4,7 +4,7 @@ import requests
 tags = '—' * 10
 
 def update():
-    base_link = "https://raw.githubusercontent.com/oversys/PyPass/master/PyPass"
+    base_link = "https://raw.githubusercontent.com/oversys/PyPass/main/PyPass"
 
     with open("./resources/info.json", "r") as file:
         current_version = json.load(file).get("version")

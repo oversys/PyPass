@@ -1,7 +1,7 @@
 # ![PyPass](logo.png)
 A password manager written in Python. Data is encrypted using AES-256-GCM and the key is derived using PBKDF2-HMAC-SHA512.
 
-*Check the [RELEASES.md](https://github.com/oversys/PyPass/blob/master/RELEASES.md) file for the update history and changelog.*
+*Check the [RELEASES.md](https://github.com/oversys/PyPass/blob/main/RELEASES.md) file for the update history and changelog.*
 
 *Keep a backup of the `database.json` & `info.json` files.*
 
